@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siege Operator Combiner</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('R6BlueBackground.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+  }
+  .buttons {
+    text-align: center;
+    margin: 20px 0;
+  }
+  button {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 0 8px white;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  button:hover {
+    background-color: rgba(255,255,255,0.2);
+  }
+  button.active {
+    background-color: white;
+    color: #0078d7;
+    box-shadow: 0 0 15px white;
+  }
+  #attackers-list, #defenders-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px,1fr));
+    gap: 15px;
+    max-width: 960px;
+    margin: 0 auto 40px;
+  }
+  #defenders-list.hidden, #attackers-list.hidden {
+    display: none;
+  }
+  .operator-card {
+    background: rgba(0,0,0,0.5);
+    border-radius: 8px;
+    text-align: center;
+    padding: 8px;
+    box-shadow: 0 0 10px white;
+  }
+  .operator-card img {
+    width: 100px;
+    height: 133px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+  .operator-name {
+    font-weight: bold;
+    font-size: 0.95rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="buttons">
+  <button id="btn-attackers" class="active">Attackers</button>
+  <button id="btn-defenders">Defenders</button>
+</div>
+
+<div id="attackers-list"></div>
+<div id="defenders-list" class="hidden"></div>
+
+<script>
+  // Operator data array with placeholders
+  const operators = [
+    // Attackers (38)
+    { name: "Striker", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-striker.webp" },
+    { name: "Sledge", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-sledge.webp" },
+    { name: "Thatcher", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-thatcher.webp" },
+    { name: "Ash", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-ash.webp" },
+    { name: "Thermite", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-thermite.webp" },
+    { name: "Twitch", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-twitch.webp" },
+    { name: "Montagne", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-montagne.webp" },
+    { name: "Glaz", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-glaz.webp" },
+    { name: "Fuze", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-fuze.webp" },
+    { name: "Blitz", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-blitz.webp" },
+    { name: "IQ", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-iq.webp" },
+    { name: "Buck", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-buck.webp" },
+    { name: "Blackbeard", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-blackbeard.webp" },
+    { name: "Capitão", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-capitao.webp" },
+    { name: "Hibana", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-hibana.webp" },
+    { name: "Jackal", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-jackal.webp" },
+    { name: "Ying", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-ying.webp" },
+    { name: "Zofia", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-zofia.webp" },
+    { name: "Dokkaebi", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-dokkaebi.webp" },
+    { name: "Lion", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-lion.webp" },
+    { name: "Finka", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-finka.webp" },
+    { name: "Maverick", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-maverick.webp" },
+    { name: "Nomad", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-nomad.webp" },
+    { name: "Gridlock", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-gridlock.webp" },
+    { name: "Nøkk", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-nokk.webp" },
+    { name: "Amaru", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-amaru.webp" },
+    { name: "Kali", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-kali.webp" },
+    { name: "Iana", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-iana.webp" },
+    { name: "Ace", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-ace.webp" },
+    { name: "Zero", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-zero.webp" },
+    { name: "Flores", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-flores.webp" },
+    { name: "Osa", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-osa.webp" },
+    { name: "Sens", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-sens.webp" },
+    { name: "Grim", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-drim.webp" },
+    { name: "Brava", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-brava.webp" },
+    { name: "Ram", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-ram.webp" },
+    { name: "Deimos", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-deimos.webp" },
+    { name: "Rauora", team: "attacker", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-rauora.webp" },
+    // Defender (37)
+    { name: "Sentry", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-sentry.webp" },
+    { name: "Smoke", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-smoke.webp" },
+    { name: "Mute", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-mute.webp" },
+    { name: "Castle", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-castle.webp" },
+    { name: "Pulse", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-pulse.webp" },
+    { name: "Doc", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-doc.webp" },
+    { name: "Rook", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-rook.webp" },
+    { name: "Kapkan", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-kapkan.webp" },
+    { name: "Tachanka", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-tachanka.webp" },
+    { name: "Jäger", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-jager.webp" },
+    { name: "Bandit", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-bandit.webp" },
+    { name: "Frost", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-frost.webp" },
+    { name: "Valkyrie", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-valkyrie.webp" },
+    { name: "Caveira", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-caveira.webp" },
+    { name: "Echo", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-echo.webp" },
+    { name: "Mira", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-mira.webp" },
+    { name: "Lesion", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-lesion.webp" },
+    { name: "Ela", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-ela.webp" },
+    { name: "Vigil", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-vigil.webp" },
+    { name: "Maestro", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-maestro.webp" },
+    { name: "Alibi", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-alibi.webp" },
+    { name: "Clash", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-clash.webp" },
+    { name: "Kaid", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-kaid.webp" },
+    { name: "Mozzie", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-mozzie.webp" },
+    { name: "Warden", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-warden.webp" },
+    { name: "Goyo", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-goyo.webp" },
+    { name: "Wamai", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-wamai.webp" },
+    { name: "Oryx", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-oryx.webp" },
+    { name: "Melusi", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-melusi.webp" },
+    { name: "Aruni", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-aruni.webp" },
+    { name: "Thunderbird", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-thunderbird.webp" },
+    { name: "Thorn", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-thorn.webp" },
+    { name: "Azami", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-azami.webp" },
+    { name: "Solis", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-solis.webp" },
+    { name: "Fenrir", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-fenrir.webp" },
+    { name: "Tuburão", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-tuburao.webp" },
+    { name: "Skopos", team: "defender", image: "https://raw.githubusercontent.com/life7729/r6-combiner/main/r6-operator-list-skopos.webp" },
+  ];
+
+  const btnAttackers = document.getElementById('btn-attackers');
+  const btnDefenders = document.getElementById('btn-defenders');
+  const attackersList = document.getElementById('attackers-list');
+  const defendersList = document.getElementById('defenders-list');
+
+  function renderOperators(team) {
+    const container = team === 'attacker' ? attackersList : defendersList;
+    const otherContainer = team === 'attacker' ? defendersList : attackersList;
+
+    container.innerHTML = ''; // Clear the container
+    otherContainer.classList.add('hidden');
+    container.classList.remove('hidden');
+
+    operators
+      .filter(op => op.team === team)
+      .forEach(op => {
+        const card = document.createElement('div');
+        card.className = 'operator-card';
+        card.setAttribute('data-operator', op.name);
+
+        const img = document.createElement('img');
+        img.src = op.image;
+        img.alt = op.name;
+
+        const nameDiv = document.createElement('div');
+        nameDiv.className = 'operator-name';
+        nameDiv.textContent = op.name;
+
+        card.appendChild(img);
+        card.appendChild(nameDiv);
+        container.appendChild(card);
+      });
+  }
+
+  btnAttackers.addEventListener('click', () => {
+    btnAttackers.classList.add('active');
+    btnDefenders.classList.remove('active');
+    renderOperators('attacker');
+  });
+
+  btnDefenders.addEventListener('click', () => {
+    btnDefenders.classList.add('active');
+    btnAttackers.classList.remove('active');
+    renderOperators('defender');
+  });
+
+  // Initial render: Attackers visible by default
+  renderOperators('attacker');
+</script>
+
+</body>
+</html>
