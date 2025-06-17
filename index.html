@@ -173,8 +173,22 @@
     .forEach(op => {
       const card = document.createElement('a');
       card.href = `operator.html?name=${encodeURIComponent(op.name)}`;
-      card.className = 'operator-card';
-      card.setAttribute('data-operator', op.name);
+const link = document.createElement('a');
+link.href = `operator.html?name=${encodeURIComponent(op.name)}`;
+link.className = 'operator-card';
+
+const img = document.createElement('img');
+img.src = op.image;
+img.alt = op.name;
+
+const nameDiv = document.createElement('div');
+nameDiv.className = 'operator-name';
+nameDiv.textContent = op.name;
+
+link.appendChild(img);
+link.appendChild(nameDiv);
+container.appendChild(link);
+
 
       const img = document.createElement('img');
       img.src = op.image;
