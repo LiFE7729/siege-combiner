@@ -1,202 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Siege Operator Combiner</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #0f172a;
-      color: white;
-      text-align: center;
-    }
-
-    header {
-      padding: 20px;
-    }
-
-    .toggle-buttons {
-      margin-bottom: 20px;
-    }
-
-    .toggle-buttons label {
-      margin: 0 10px;
-      cursor: pointer;
-    }
-
-    #operator-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 15px;
-      padding: 20px;
-      justify-items: center;
-    }
-
-    .operator-card {
-      background-color: #1e293b;
-      padding: 10px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .operator-card:hover {
-      transform: scale(1.05);
-    }
-
-    .operator-card img {
-      width: 100px;
-      height: auto;
-    }
-
-    .operator-card p {
-      margin: 5px 0 0;
-    }
-
-    #preview {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      padding: 30px;
-    }
-
-    #preview img {
-      max-width: 300px;
-      margin-bottom: 20px;
-    }
-
-    #back-button {
-      background-color: #334155;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-
-    #back-button:hover {
-      background-color: #475569;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siege Operator Combiner</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('R6BlueBackground.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+  }
+  .buttons {
+    text-align: center;
+    margin: 20px 0;
+  }
+  button {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 0 8px white;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  button:hover {
+    background-color: rgba(255,255,255,0.2);
+  }
+  button.active {
+    background-color: white;
+    color: #0078d7;
+    box-shadow: 0 0 15px white;
+  }
+  #attackers-list, #defenders-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px,1fr));
+    gap: 15px;
+    max-width: 960px;
+    margin: 0 auto 40px;
+  }
+  #defenders-list.hidden, #attackers-list.hidden {
+    display: none;
+  }
+  .operator-card {
+    background: rgba(0,0,0,0.5);
+    border-radius: 8px;
+    text-align: center;
+    padding: 8px;
+    box-shadow: 0 0 10px white;
+  }
+  .operator-card img {
+    width: 100px;
+    height: 133px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 5px;
+  }
+  .operator-name {
+    font-weight: bold;
+    font-size: 0.95rem;
+  }
+</style>
 </head>
 <body>
 
-  <header>
-    <h1>Siege Operator Combiner</h1>
-    <div class="toggle-buttons">
-      <label>
-        <input type="checkbox" id="toggle-attacker" checked /> Attackers
-      </label>
-      <label>
-        <input type="checkbox" id="toggle-defender" checked /> Defenders
-      </label>
-    </div>
-  </header>
+<div class="buttons">
+  <button id="btn-attackers" class="active">Attackers</button>
+  <button id="btn-defenders">Defenders</button>
+</div>
 
-  <main>
-    <div id="operator-grid"></div>
+<div id="attackers-list"></div>
+<div id="defenders-list" class="hidden"></div>
 
-    <div id="preview">
-      <img id="preview-image" src="" alt="Operator Preview" />
-      <h2 id="preview-name"></h2>
-      <button id="back-button">Back</button>
-    </div>
-  </main>
+<script>
+  const operators = [
+    { name: "Striker", team: "attacker", image: "r6-operators-list-striker.webp" },
+    { name: "Sledge", team: "attacker", image: "r6-operators-list-sledge.webp" },
+    { name: "Thatcher", team: "attacker", image: "r6-operators-list-thatcher.webp" },
+    { name: "Ash", team: "attacker", image: "r6-operators-list-ash.webp" },
+    { name: "Thermite", team: "attacker", image: "r6-operators-list-thermite.webp" },
+    { name: "Twitch", team: "attacker", image: "r6-operators-list-twitch.webp" },
+    { name: "Montagne", team: "attacker", image: "r6-operators-list-montagne.webp" },
+    { name: "Glaz", team: "attacker", image: "r6-operators-list-glaz.webp" },
+    { name: "Fuze", team: "attacker", image: "r6-operators-list-fuze.webp" },
+    { name: "Blitz", team: "attacker", image: "r6-operators-list-blitz.webp" },
+    { name: "IQ", team: "attacker", image: "r6-operators-list-iq.webp" },
+    { name: "Buck", team: "attacker", image: "r6-operators-list-buck.webp" },
+    { name: "Blackbeard", team: "attacker", image: "r6-operators-list-blackbeard.webp" },
+    { name: "Capitão", team: "attacker", image: "r6-operators-list-capitao.webp" },
+    { name: "Hibana", team: "attacker", image: "r6-operators-list-hibana.webp" },
+    { name: "Jackal", team: "attacker", image: "r6-operators-list-jackal.webp" },
+    { name: "Ying", team: "attacker", image: "r6-operators-list-ying.webp" },
+    { name: "Zofia", team: "attacker", image: "r6-operators-list-zofia.webp" },
+    { name: "Dokkaebi", team: "attacker", image: "r6-operators-list-dokkaebi.webp" },
+    { name: "Lion", team: "attacker", image: "r6-operators-list-lion.webp" },
+    { name: "Finka", team: "attacker", image: "r6-operators-list-finka.webp" },
+    { name: "Maverick", team: "attacker", image: "r6-operators-list-maverick.webp" },
+    { name: "Nomad", team: "attacker", image: "r6-operators-list-nomad.webp" },
+    { name: "Gridlock", team: "attacker", image: "r6-operators-list-gridlock.webp" },
+    { name: "Nøkk", team: "attacker", image: "r6-operators-list-nokk.webp" },
+    { name: "Amaru", team: "attacker", image: "r6-operators-list-amaru.webp" },
+    { name: "Kali", team: "attacker", image: "r6-operators-list-kali.webp" },
+    { name: "Iana", team: "attacker", image: "r6-operators-list-iana.webp" },
+    { name: "Ace", team: "attacker", image: "r6-operators-list-ace.webp" },
+    { name: "Zero", team: "attacker", image: "r6-operators-list-zero.webp" },
+    { name: "Flores", team: "attacker", image: "r6-operators-list-flores.webp" },
+    { name: "Osa", team: "attacker", image: "r6-operators-list-osa.webp" },
+    { name: "Sens", team: "attacker", image: "r6-operators-list-sens.webp" },
+    { name: "Grim", team: "attacker", image: "r6-operators-list-grim.webp" },
+    { name: "Brava", team: "attacker", image: "r6-operators-list-brava.webp" },
+    { name: "Ram", team: "attacker", image: "r6-operators-list-ram.webp" },
+    { name: "Deimos", team: "attacker", image: "r6-operators-list-deimos.webp" },
+    { name: "Rauora", team: "attacker", image: "r6-operators-list-rauora.webp" },
+    
+    { name: "Sentry", team: "defender", image: "r6-operators-list-sentry.webp" },
+    { name: "Smoke", team: "defender", image: "r6-operators-list-smoke.webp" },
+    { name: "Mute", team: "defender", image: "r6-operators-list-mute.webp" },
+    { name: "Castle", team: "defender", image: "r6-operators-list-castle.webp" },
+    { name: "Pulse", team: "defender", image: "r6-operators-list-pulse.webp" },
+    { name: "Doc", team: "defender", image: "r6-operators-list-doc.webp" },
+    { name: "Rook", team: "defender", image: "r6-operators-list-rook.webp" },
+    { name: "Kapkan", team: "defender", image: "r6-operators-list-kapkan.webp" },
+    { name: "Tachanka", team: "defender", image: "r6-operators-list-tachanka.webp" },
+    { name: "Jäger", team: "defender", image: "r6-operators-list-jager.webp" },
+    { name: "Bandit", team: "defender", image: "r6-operators-list-bandit.webp" },
+    { name: "Frost", team: "defender", image: "r6-operators-list-frost.webp" },
+    { name: "Valkyrie", team: "defender", image: "r6-operators-list-valkyrie.webp" },
+    { name: "Caveira", team: "defender", image: "r6-operators-list-caveira.webp" },
+    { name: "Echo", team: "defender", image: "r6-operators-list-echo.webp" },
+    { name: "Mira", team: "defender", image: "r6-operators-list-mira.webp" },
+    { name: "Lesion", team: "defender", image: "r6-operators-list-lesion.webp" },
+    { name: "Ela", team: "defender", image: "r6-operators-list-ela.webp" },
+    { name: "Vigil", team: "defender", image: "r6-operators-list-vigil.webp" },
+    { name: "Maestro", team: "defender", image: "r6-operators-list-maestro.webp" },
+    { name: "Alibi", team: "defender", image: "r6-operators-list-alibi.webp" },
+    { name: "Clash", team: "defender", image: "r6-operators-list-clash.webp" },
+    { name: "Kaid", team: "defender", image: "r6-operators-list-kaid.webp" },
+    { name: "Mozzie", team: "defender", image: "r6-operators-list-mozzie.webp" },
+    { name: "Warden", team: "defender", image: "r6-operators-list-warden.webp" },
+    { name: "Goyo", team: "defender", image: "r6-operators-list-goyo.webp" },
+    { name: "Wamai", team: "defender", image: "r6-operators-list-wamai.webp" },
+    { name: "Oryx", team: "defender", image: "r6-operators-list-oryx.webp" },
+    { name: "Melusi", team: "defender", image: "r6-operators-list-melusi.webp" },
+    { name: "Aruni", team: "defender", image: "r6-operators-list-aruni.webp" },
+    { name: "Thunderbird", team: "defender", image: "r6-operators-list-thunderbird.webp" },
+    { name: "Thorn", team: "defender", image: "r6-operators-list-thorn.webp" },
+    { name: "Azami", team: "defender", image: "r6-operators-list-azami.webp" },
+    { name: "Solis", team: "defender", image: "r6-operators-list-solis.webp" },
+    { name: "Fenrir", team: "defender", image: "r6-operators-list-fenrir.webp" },
+    { name: "Tubarão", team: "defender", image: "r6-operators-list-tubarao.webp" },
+    { name: "Skopos", team: "defender", image: "r6-operators-list-skopos.webp" },
+  ];
+  const btnAttackers = document.getElementById('btn-attackers');
+  const btnDefenders = document.getElementById('btn-defenders');
+  const attackersList = document.getElementById('attackers-list');
+  const defendersList = document.getElementById('defenders-list');
 
-  <script>
-    const operators = {
-      "Striker": "attacker",
-      "Sledge": "attacker",
-      "Thatcher": "attacker",
-      "Smoke": "defender",
-      "Mute": "defender",
-      "Castle": "defender"
-      // Add all others as needed
-    };
+  function renderOperators(team) {
+    const container = team === 'attacker' ? attackersList : defendersList;
+    const otherContainer = team === 'attacker' ? defendersList : attackersList;
 
-    const operatorImages = {
-      "Striker": "main/r6-operators-list-striker.webp",
-      "Sledge": "main/r6-operators-list-sledge.webp",
-      "Thatcher": "main/r6-operators-list-thatcher.webp",
-      "Smoke": "main/r6-operators-list-smoke.webp",
-      "Mute": "main/r6-operators-list-mute.webp",
-      "Castle": "main/r6-operators-list-castle.webp"
-      // Add all others as needed
-    };
+    container.innerHTML = ''; // Clear the container
+    otherContainer.classList.add('hidden');
+    container.classList.remove('hidden');
 
-    const baseImagePathMap = {
-      "Striker": "main/r6-operators-base-striker-removebg-preview.png",
-      "Sledge": "main/r6-operators-base-sledge-removebg-preview.png",
-      "Thatcher": "main/r6-operators-base-thatcher-removebg-preview.png",
-      "Smoke": "main/r6-operators-base-smoke-removebg-preview.png",
-      "Mute": "main/r6-operators-base-mute-removebg-preview.png",
-      "Castle": "main/r6-operators-base-castle-removebg-preview.png"
-      // Add all others as needed
-    };
-    const operatorGrid = document.getElementById("operator-grid");
-    const preview = document.getElementById("preview");
-    const previewImage = document.getElementById("preview-image");
-    const previewName = document.getElementById("preview-name");
-    const backButton = document.getElementById("back-button");
+    operators
+      .filter(op => op.team === team)
+      .forEach(op => {
+        const card = document.createElement('div');
+        card.className = 'operator-card';
+        card.setAttribute('data-operator', op.name);
 
-    function renderOperators() {
-      operatorGrid.innerHTML = "";
-      operatorGrid.style.display = "grid";
-      preview.style.display = "none";
+        const img = document.createElement('img');
+        img.src = op.image;
+        img.alt = op.name;
 
-      const showAttacker = document.getElementById("toggle-attacker").checked;
-      const showDefender = document.getElementById("toggle-defender").checked;
+        const nameDiv = document.createElement('div');
+        nameDiv.className = 'operator-name';
+        nameDiv.textContent = op.name;
 
-      Object.entries(operators).forEach(([name, role]) => {
-        if ((role === "attacker" && showAttacker) || (role === "defender" && showDefender)) {
-          const card = document.createElement("div");
-          card.className = "operator-card";
-
-          const img = document.createElement("img");
-          img.src = operatorImages[name];
-          img.alt = name;
-
-          const label = document.createElement("p");
-          label.textContent = name;
-
-          card.appendChild(img);
-          card.appendChild(label);
-
-          card.addEventListener("click", () => {
-            showPreview(name);
-          });
-
-          operatorGrid.appendChild(card);
-        }
+        card.appendChild(img);
+        card.appendChild(nameDiv);
+        container.appendChild(card);
       });
-    }
+  }
 
-    function showPreview(name) {
-      const baseImgPath = baseImagePathMap[name];
-      if (!baseImgPath) {
-        alert("Base image not found for " + name);
-        return;
-      }
+  btnAttackers.addEventListener('click', () => {
+    btnAttackers.classList.add('active');
+    btnDefenders.classList.remove('active');
+    renderOperators('attacker');
+  });
 
-      operatorGrid.style.display = "none";
-      preview.style.display = "flex";
-      previewImage.src = baseImgPath;
-      previewName.textContent = name;
-    }
+  btnDefenders.addEventListener('click', () => {
+    btnDefenders.classList.add('active');
+    btnAttackers.classList.remove('active');
+    renderOperators('defender');
+  });
 
-    backButton.addEventListener("click", () => {
-      renderOperators();
-    });
-
-    document.getElementById("toggle-attacker").addEventListener("change", renderOperators);
-    document.getElementById("toggle-defender").addEventListener("change", renderOperators);
-
-    renderOperators();
-  </script>
+  // Initial render: Attackers visible by default
+  renderOperators('attacker');
+</script>
 
 </body>
 </html>
