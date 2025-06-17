@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Operator View</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('R6BlueBackground.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    .operator-image {
+      max-width: 300px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .operator-name {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .back-button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: 2px solid white;
+      border-radius: 5px;
+      background-color: transparent;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 8px white;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="operator-display">
+    <!-- Image and name will go here -->
+  </div>
+
+  <button class="back-button" onclick="goBack()">← Back to Operators Menu</button>
+
+  <script>
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    function goBack() {
+      window.location.href = "index.html";
+    }
+
+    const operatorName = getQueryParam("name");
+    if (operatorName) {
+      const formattedName = operatorName.replace(/\s+/g, '-').toLowerCase();
+      const imagePath = `r6-operators-base-${formattedName}-removebg-preview.png`;
+
+      const display = document.getElementById("operator-display");
+
+      const img = document.createElement("img");
+      img.src = imagePath;
+      img.alt = operatorName;
+      img.className = "operator-image";
+
+      const nameDiv = document.createElement("div");
+      nameDiv.className = "operator-name";
+      nameDiv.textContent = operatorName;
+
+      display.appendChild(img);
+      display.appendChild(nameDiv);
+    } else {
+      document.getElementById("operator-display").innerHTML = "<p>Operator not specified.</p>";
+    }
+  </script>
+
+</body>
+</html>
