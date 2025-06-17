@@ -43,8 +43,8 @@
     max-width: 960px;
     margin: 0 auto 40px;
   }
-  #defenders-list.hidden, #attackers-list.hidden {
-    display: none;
+  .hidden {
+    display: none !important;
   }
   .operator-card {
     background: rgba(0,0,0,0.5);
@@ -64,6 +64,19 @@
     font-weight: bold;
     font-size: 0.95rem;
   }
+  #operator-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    flex-direction: column;
+  }
+  #operator-preview img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px white;
+  }
 </style>
 </head>
 <body>
@@ -75,6 +88,7 @@
 
 <div id="attackers-list"></div>
 <div id="defenders-list" class="hidden"></div>
+<div id="operator-preview" class="hidden"></div>
 
 <script>
   const operators = [
@@ -116,7 +130,6 @@
     { name: "Ram", team: "attacker", image: "r6-operators-list-ram.webp" },
     { name: "Deimos", team: "attacker", image: "r6-operators-list-deimos.webp" },
     { name: "Rauora", team: "attacker", image: "r6-operators-list-rauora.webp" },
-    
     { name: "Sentry", team: "defender", image: "r6-operators-list-sentry.webp" },
     { name: "Smoke", team: "defender", image: "r6-operators-list-smoke.webp" },
     { name: "Mute", team: "defender", image: "r6-operators-list-mute.webp" },
@@ -153,19 +166,22 @@
     { name: "Solis", team: "defender", image: "r6-operators-list-solis.webp" },
     { name: "Fenrir", team: "defender", image: "r6-operators-list-fenrir.webp" },
     { name: "Tubarão", team: "defender", image: "r6-operators-list-tubarao.webp" },
-    { name: "Skopos", team: "defender", image: "r6-operators-list-skopos.webp" },
+    { name: "Skopos", team: "defender", image: "r6-operators-list-skopos.webp" }
   ];
+
   const btnAttackers = document.getElementById('btn-attackers');
   const btnDefenders = document.getElementById('btn-defenders');
   const attackersList = document.getElementById('attackers-list');
   const defendersList = document.getElementById('defenders-list');
+  const previewContainer = document.getElementById('operator-preview');
 
   function renderOperators(team) {
     const container = team === 'attacker' ? attackersList : defendersList;
     const otherContainer = team === 'attacker' ? defendersList : attackersList;
 
-    container.innerHTML = ''; // Clear the container
+    container.innerHTML = '';
     otherContainer.classList.add('hidden');
+    previewContainer.classList.add('hidden');
     container.classList.remove('hidden');
 
     operators
@@ -185,8 +201,36 @@
 
         card.appendChild(img);
         card.appendChild(nameDiv);
+        card.addEventListener('click', () => {
+          showOperatorPreview(op.name);
+        });
+
         container.appendChild(card);
       });
+  }
+
+  function showOperatorPreview(operatorName) {
+    const fileName = operatorName.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const baseImagePath = `main/r6-operators-base-${fileName}-removebg-preview.png`;
+
+
+    attackersList.classList.add('hidden');
+    defendersList.classList.add('hidden');
+
+    previewContainer.innerHTML = `
+      <img src="${baseImagePath}" alt="${operatorName}">
+      <button onclick="goBack()" style="margin-top: 20px;">Back to List</button>
+    `;
+    previewContainer.classList.remove('hidden');
+  }
+
+  function goBack() {
+    previewContainer.classList.add('hidden');
+    if (btnAttackers.classList.contains('active')) {
+      renderOperators('attacker');
+    } else {
+      renderOperators('defender');
+    }
   }
 
   btnAttackers.addEventListener('click', () => {
@@ -201,8 +245,7 @@
     renderOperators('defender');
   });
 
-  // Initial render: Attackers visible by default
-  renderOperators('attacker');
+  renderOperators('attacker'); // Initial render
 </script>
 
 </body>
