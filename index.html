@@ -1,97 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Siege Operator Combiner</title>
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: url('R6BlueBackground.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: white;
-  }
-  .buttons {
-    text-align: center;
-    margin: 20px 0;
-  }
-  button {
-    background: transparent;
-    border: 2px solid white;
-    color: white;
-    font-size: 1.1rem;
-    padding: 10px 20px;
-    margin: 0 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    box-shadow: 0 0 8px white;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  button:hover {
-    background-color: rgba(255,255,255,0.2);
-  }
-  button.active {
-    background-color: white;
-    color: #0078d7;
-    box-shadow: 0 0 15px white;
-  }
-  #attackers-list, #defenders-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px,1fr));
-    gap: 15px;
-    max-width: 960px;
-    margin: 0 auto 40px;
-  }
-  .hidden {
-    display: none !important;
-  }
-  .operator-card {
-    background: rgba(0,0,0,0.5);
-    border-radius: 8px;
-    text-align: center;
-    padding: 8px;
-    box-shadow: 0 0 10px white;
-  }
-  .operator-card img {
-    width: 100px;
-    height: 133px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 5px;
-  }
-  .operator-name {
-    font-weight: bold;
-    font-size: 0.95rem;
-  }
-  #operator-preview {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 70vh;
-    flex-direction: column;
-  }
-  #operator-preview img {
-    max-width: 300px;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 0 15px white;
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>Siege Operator Combiner</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #0d1117;
+      color: #c9d1d9;
+    }
+
+    .buttons {
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-right: 10px;
+      background-color: #21262d;
+      color: #c9d1d9;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button.active {
+      background-color: #388bfd;
+      color: white;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .operator-card {
+      width: 120px;
+      text-align: center;
+      background-color: #161b22;
+      border-radius: 8px;
+      padding: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .operator-card:hover {
+      transform: scale(1.05);
+    }
+
+    .operator-card img {
+      width: 100%;
+      height: auto;
+    }
+
+    .operator-name {
+      margin-top: 5px;
+      font-size: 14px;
+    }
+
+    .operator-name-large {
+      font-size: 1.8em;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .preview-area {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .operator-base-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
-<div class="buttons">
-  <button id="btn-attackers" class="active">Attackers</button>
-  <button id="btn-defenders">Defenders</button>
-</div>
+  <div class="buttons">
+    <button id="btn-attackers" class="active">Attackers</button>
+    <button id="btn-defenders">Defenders</button>
+    <button id="back-button" class="hidden">Back</button>
+  </div>
 
-<div id="attackers-list"></div>
-<div id="defenders-list" class="hidden"></div>
-<div id="operator-preview" class="hidden"></div>
+  <div id="attackers-list" class="grid"></div>
+  <div id="defenders-list" class="grid hidden"></div>
+  <div id="operator-preview" class="preview-area hidden"></div>
 
-<script>
-  const operators = [
+  <script>
+    const operators = [
     { name: "Striker", team: "attacker", image: "r6-operators-list-striker.webp" },
     { name: "Sledge", team: "attacker", image: "r6-operators-list-sledge.webp" },
     { name: "Thatcher", team: "attacker", image: "r6-operators-list-thatcher.webp" },
@@ -169,8 +174,7 @@
     { name: "Skopos", team: "defender", image: "r6-operators-list-skopos.webp" }
   ];
 
-  // Custom base image mapping - operator name to base image path in "main"
-  const baseImagePathMap = {
+    const baseImagePathMap = {
     "Striker": "main/r6-operators-base-striker-removebg-preview.png",
     "Sledge": "main/r6-operators-base-sledge-removebg-preview.png",
     "Thatcher": "main/r6-operators-base-thatcher-removebg-preview.png",
@@ -247,86 +251,107 @@
     "Tubarão": "main/r6-operators-base-tubarao-removebg-preview.png",
     "Skopos": "main/r6-operators-base-skopos-removebg-preview.png"
   };
+    };
 
-  const attackersListEl = document.getElementById('attackers-list');
-  const defendersListEl = document.getElementById('defenders-list');
-  const operatorPreviewEl = document.getElementById('operator-preview');
+    const attackersListEl = document.getElementById('attackers-list');
+    const defendersListEl = document.getElementById('defenders-list');
+    const operatorPreviewEl = document.getElementById('operator-preview');
+    const backButton = document.getElementById('back-button');
+    const btnAttackers = document.getElementById('btn-attackers');
+    const btnDefenders = document.getElementById('btn-defenders');
 
-  // Create operator cards grid
-  function createOperatorCards() {
-    attackersListEl.innerHTML = '';
-    defendersListEl.innerHTML = '';
+    function createOperatorCards() {
+      attackersListEl.innerHTML = '';
+      defendersListEl.innerHTML = '';
+      operatorPreviewEl.classList.add('hidden');
+      backButton.classList.add('hidden');
 
-    operators.forEach(op => {
-      const card = document.createElement('div');
-      card.className = 'operator-card';
-      card.title = op.name;
+      operators.forEach(op => {
+        const card = document.createElement('div');
+        card.className = 'operator-card';
+        card.title = op.name;
 
-      const img = document.createElement('img');
-      img.src = op.image;
-      img.alt = op.name;
+        const img = document.createElement('img');
+        img.src = op.image;
+        img.alt = op.name;
 
-      const nameEl = document.createElement('div');
-      nameEl.className = 'operator-name';
-      nameEl.textContent = op.name;
+        const nameEl = document.createElement('div');
+        nameEl.className = 'operator-name';
+        nameEl.textContent = op.name;
 
-      card.appendChild(img);
-      card.appendChild(nameEl);
+        card.appendChild(img);
+        card.appendChild(nameEl);
 
-      // Add click to show preview
-      card.addEventListener('click', () => {
-        showOperatorPreview(op.name);
+        card.addEventListener('click', () => {
+          showOperatorSingleView(op.name);
+        });
+
+        if (op.team === 'attacker') {
+          attackersListEl.appendChild(card);
+        } else {
+          defendersListEl.appendChild(card);
+        }
       });
-
-      if (op.team === 'attacker') {
-        attackersListEl.appendChild(card);
-      } else {
-        defendersListEl.appendChild(card);
-      }
-    });
-  }
-
-  // Show operator preview in main area using baseImagePathMap
-  function showOperatorPreview(operatorName) {
-    operatorPreviewEl.innerHTML = ''; // clear previous
-    operatorPreviewEl.classList.remove('hidden');
-
-    const baseImgPath = baseImagePathMap[operatorName];
-    if (!baseImgPath) {
-      operatorPreviewEl.textContent = 'Base image not found for ' + operatorName;
-      return;
     }
 
-    // Base image (transparent PNG)
-    const baseImg = document.createElement('img');
-    baseImg.src = baseImgPath;
-    baseImg.alt = operatorName + ' base image';
-    operatorPreviewEl.appendChild(baseImg);
-  }
+    function showOperatorSingleView(operatorName) {
+      const baseImgPath = baseImagePathMap[operatorName];
+      if (!baseImgPath) {
+        operatorPreviewEl.textContent = 'Base image not found for ' + operatorName;
+        return;
+      }
 
-  // Button toggles
-  const btnAttackers = document.getElementById('btn-attackers');
-  const btnDefenders = document.getElementById('btn-defenders');
+      attackersListEl.classList.add('hidden');
+      defendersListEl.classList.add('hidden');
 
-  btnAttackers.addEventListener('click', () => {
-    btnAttackers.classList.add('active');
-    btnDefenders.classList.remove('active');
-    attackersListEl.classList.remove('hidden');
-    defendersListEl.classList.add('hidden');
-    operatorPreviewEl.classList.add('hidden');
-  });
+      operatorPreviewEl.innerHTML = '';
+      operatorPreviewEl.classList.remove('hidden');
+      backButton.classList.remove('hidden');
 
-  btnDefenders.addEventListener('click', () => {
-    btnDefenders.classList.add('active');
-    btnAttackers.classList.remove('active');
-    defendersListEl.classList.remove('hidden');
-    attackersListEl.classList.add('hidden');
-    operatorPreviewEl.classList.add('hidden');
-  });
+      const baseImg = document.createElement('img');
+      baseImg.src = baseImgPath;
+      baseImg.alt = operatorName + ' base image';
+      baseImg.className = 'operator-base-image';
 
-  // Initialize
-  createOperatorCards();
-</script>
+      const nameEl = document.createElement('div');
+      nameEl.className = 'operator-name-large';
+      nameEl.textContent = operatorName;
+
+      operatorPreviewEl.appendChild(baseImg);
+      operatorPreviewEl.appendChild(nameEl);
+    }
+
+    backButton.addEventListener('click', () => {
+      operatorPreviewEl.classList.add('hidden');
+      backButton.classList.add('hidden');
+
+      if (btnAttackers.classList.contains('active')) {
+        attackersListEl.classList.remove('hidden');
+      } else {
+        defendersListEl.classList.remove('hidden');
+      }
+    });
+
+    btnAttackers.addEventListener('click', () => {
+      btnAttackers.classList.add('active');
+      btnDefenders.classList.remove('active');
+      attackersListEl.classList.remove('hidden');
+      defendersListEl.classList.add('hidden');
+      operatorPreviewEl.classList.add('hidden');
+      backButton.classList.add('hidden');
+    });
+
+    btnDefenders.addEventListener('click', () => {
+      btnDefenders.classList.add('active');
+      btnAttackers.classList.remove('active');
+      defendersListEl.classList.remove('hidden');
+      attackersListEl.classList.add('hidden');
+      operatorPreviewEl.classList.add('hidden');
+      backButton.classList.add('hidden');
+    });
+
+    createOperatorCards();
+  </script>
 
 </body>
 </html>
