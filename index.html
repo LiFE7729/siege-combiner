@@ -155,54 +155,42 @@
     { name: "Tubarão", team: "defender", image: "r6-operators-list-tubarao.webp" },
     { name: "Skopos", team: "defender", image: "r6-operators-list-skopos.webp" },
   ];
+<script>
   const btnAttackers = document.getElementById('btn-attackers');
   const btnDefenders = document.getElementById('btn-defenders');
   const attackersList = document.getElementById('attackers-list');
   const defendersList = document.getElementById('defenders-list');
 
   function renderOperators(team) {
-  const container = team === 'attacker' ? attackersList : defendersList;
-  const otherContainer = team === 'attacker' ? defendersList : attackersList;
+    const container = team === 'attacker' ? attackersList : defendersList;
+    const otherContainer = team === 'attacker' ? defendersList : attackersList;
 
-  container.innerHTML = ''; // Clear the container
-  otherContainer.classList.add('hidden');
-  container.classList.remove('hidden');
+    container.innerHTML = ''; // Clear the container
+    otherContainer.classList.add('hidden');
+    container.classList.remove('hidden');
 
-  operators
-    .filter(op => op.team === team)
-    .forEach(op => {
-      const card = document.createElement('a');
-      card.href = `operator.html?name=${encodeURIComponent(op.name)}`;
-const link = document.createElement('a');
-link.href = `operator.html?name=${encodeURIComponent(op.name)}`;
-link.className = 'operator-card';
+    operators
+      .filter(op => op.team === team)
+      .forEach(op => {
+        const link = document.createElement('a');
+        link.href = `operator.html?name=${encodeURIComponent(op.name)}`;
+        link.className = 'operator-card';
+        link.style.textDecoration = 'none';
+        link.style.color = 'inherit';
 
-const img = document.createElement('img');
-img.src = op.image;
-img.alt = op.name;
+        const img = document.createElement('img');
+        img.src = op.image;
+        img.alt = op.name;
 
-const nameDiv = document.createElement('div');
-nameDiv.className = 'operator-name';
-nameDiv.textContent = op.name;
+        const nameDiv = document.createElement('div');
+        nameDiv.className = 'operator-name';
+        nameDiv.textContent = op.name;
 
-link.appendChild(img);
-link.appendChild(nameDiv);
-container.appendChild(link);
-
-
-      const img = document.createElement('img');
-      img.src = op.image;
-      img.alt = op.name;
-
-      const nameDiv = document.createElement('div');
-      nameDiv.className = 'operator-name';
-      nameDiv.textContent = op.name;
-
-      card.appendChild(img);
-      card.appendChild(nameDiv);
-      container.appendChild(card);
-    });
-}
+        link.appendChild(img);
+        link.appendChild(nameDiv);
+        container.appendChild(link);
+      });
+  }
 
   btnAttackers.addEventListener('click', () => {
     btnAttackers.classList.add('active');
@@ -218,7 +206,6 @@ container.appendChild(link);
 
   // Initial render: Attackers visible by default
   renderOperators('attacker');
-</script>
-
-</body>
+  </script>
+ </body>
 </html>
