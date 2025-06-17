@@ -5,85 +5,110 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Operator View</title>
   <style>
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-shadow: 0 0 5px black;
+  transition: background-color 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: url('R6BlueBackground.jpg') no-repeat center center fixed;
       background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       text-align: center;
     }
 
     .operator-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .operator-name {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      text-shadow: 0 0 10px black;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px white;
     }
 
     .operator-image {
-      max-width: 90%;
-      max-height: 80vh;
-      object-fit: contain;
+      max-width: 300px;
+      width: 100%;
       border-radius: 10px;
-      box-shadow: 0 0 20px white;
     }
 
-    .error-message {
-      color: red;
-      font-size: 1.2rem;
-      text-shadow: 0 0 5px black;
+    h1 {
+      margin: 20px 0 10px;
+    }
+
+    .back-button {
+      margin-top: 20px;
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 0 10px white;
+      transition: background-color 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: rgba(255,255,255,0.2);
     }
   </style>
 </head>
 <body>
 
-<div class="operator-container" id="operatorDisplay">
-  <!-- Populated by script -->
+<div class="operator-container">
+  <img id="operatorImage" class="operator-image" src="" alt="Operator" />
+  <h1 id="operatorName">Operator</h1>
+  <button class="back-button" onclick="goBack()">← Back</button>
 </div>
 
 <script>
-  // Read operator name from URL
+  // Get operator name from URL
   const params = new URLSearchParams(window.location.search);
   const operatorName = params.get('name');
 
-  // Format filename
-  function generateFilename(name) {
-    const normalized = name.toLowerCase()
-      .normalize('NFD')                // Remove accents like ø or ã
-      .replace(/[\u0300-\u036f]/g, '') // Remove combining marks
-      .replace(/\s+/g, '-')            // Replace spaces with hyphens
-      .replace(/[^a-z0-9-]/g, '');     // Remove special characters
-    return `r6-operators-base-${normalized}-removebg-preview.png`;
+  if (operatorName) {
+    const lower = operatorName.toLowerCase().replace(/[^a-z0-9]/gi, '');
+    const imageName = `r6-operators-base-${lower}-removebg-preview.png`;
+
+    document.getElementById('operatorImage').src = imageName;
+    document.getElementById('operatorImage').alt = operatorName;
+    document.getElementById('operatorName').textContent = operatorName;
+  } else {
+    document.getElementById('operatorName').textContent = 'No operator selected';
   }
 
-  const container = document.getElementById('operatorDisplay');
-
-  if (operatorName) {
-    const img = document.createElement('img');
-    img.src = generateFilename(operatorName);
-    img.alt = operatorName;
-    img.className = 'operator-image';
-
-    const title = document.createElement('div');
-    title.className = 'operator-name';
-    title.textContent = operatorName;
-
-    container.appendChild(title);
-    container.appendChild(img);
-  } else {
-    container.innerHTML = `<div class="error-message">No operator selected.</div>`;
+  function goBack() {
+    window.location.href = 'index.html';
   }
 </script>
+<button onclick="goBack()" class="back-button">⬅ Back</button>
+
+<script>
+  function goBack() {
+    window.location.href = 'index.html';
+  }
+</script>
+
 
 </body>
 </html>
