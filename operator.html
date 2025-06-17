@@ -63,16 +63,10 @@
 </div>
 
 <script>
-  // Get operator name from URL
-  const params = new URLSearchParams(window.location.search);
-  const operatorName = params.get('name');
-
-  if (operatorName) {
-<script>
   const nameOverrides = {
     'Capitão': 'capitao',
     'Nøkk': 'nokk',
-    'Sledge': 'sledge' // Included for consistency; this one already matches
+    'Sledge': 'sledge'
   };
 
   const params = new URLSearchParams(window.location.search);
@@ -80,29 +74,16 @@
 
   function generateFilename(name) {
     const normalized = nameOverrides[name] || name.toLowerCase()
-      .normalize('NFD')                // Break accented characters
-      .replace(/[\u0300-\u036f]/g, '') // Remove accents
-      .replace(/\s+/g, '-')            // Spaces to hyphens
-      .replace(/[^a-z0-9-]/g, '');     // Remove special chars
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '') // Strip accents
+      .replace(/\s+/g, '-')            // Replace spaces with hyphens
+      .replace(/[^a-z0-9-]/g, '');     // Remove special characters
     return `r6-operators-base-${normalized}-removebg-preview.png`;
   }
 
   if (operatorName) {
     const filename = generateFilename(operatorName);
     document.getElementById('operatorImage').src = filename;
-    document.getElementById('operatorImage').alt = operatorName;
-    document.getElementById('operatorName').textContent = operatorName;
-  } else {
-    document.getElementById('operatorName').textContent = 'No operator selected';
-  }
-
-  function goBack() {
-    window.location.href = 'index.html';
-  }
-</script>
-    const imageName = `r6-operators-base-${lower}-removebg-preview.png`;
-
-    document.getElementById('operatorImage').src = imageName;
     document.getElementById('operatorImage').alt = operatorName;
     document.getElementById('operatorName').textContent = operatorName;
   } else {
