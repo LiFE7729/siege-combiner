@@ -72,7 +72,89 @@
       'Jäger': 'jager',
       'Thorn': 'thorn',
       'Tubarão': 'tubarao',
-      // Add any others as needed here
+      // Add others if needed
+    };
+
+    // Map operator names to their teams for back button navigation
+    const operatorsTeams = {
+      // Attackers
+      'Striker': 'attacker',
+      'Sledge': 'attacker',
+      'Thatcher': 'attacker',
+      'Ash': 'attacker',
+      'Thermite': 'attacker',
+      'Twitch': 'attacker',
+      'Montagne': 'attacker',
+      'Glaz': 'attacker',
+      'Fuze': 'attacker',
+      'Blitz': 'attacker',
+      'IQ': 'attacker',
+      'Buck': 'attacker',
+      'Blackbeard': 'attacker',
+      'Capitão': 'attacker',
+      'Hibana': 'attacker',
+      'Jackal': 'attacker',
+      'Ying': 'attacker',
+      'Zofia': 'attacker',
+      'Dokkaebi': 'attacker',
+      'Lion': 'attacker',
+      'Finka': 'attacker',
+      'Maverick': 'attacker',
+      'Nomad': 'attacker',
+      'Gridlock': 'attacker',
+      'Nøkk': 'attacker',
+      'Amaru': 'attacker',
+      'Kali': 'attacker',
+      'Iana': 'attacker',
+      'Ace': 'attacker',
+      'Zero': 'attacker',
+      'Flores': 'attacker',
+      'Osa': 'attacker',
+      'Sens': 'attacker',
+      'Grim': 'attacker',
+      'Brava': 'attacker',
+      'Ram': 'attacker',
+      'Deimos': 'attacker',
+      'Rauora': 'attacker',
+
+      // Defenders
+      'Sentry': 'defender',
+      'Smoke': 'defender',
+      'Mute': 'defender',
+      'Castle': 'defender',
+      'Pulse': 'defender',
+      'Doc': 'defender',
+      'Rook': 'defender',
+      'Kapkan': 'defender',
+      'Tachanka': 'defender',
+      'Jäger': 'defender',
+      'Bandit': 'defender',
+      'Frost': 'defender',
+      'Valkyrie': 'defender',
+      'Caveira': 'defender',
+      'Echo': 'defender',
+      'Mira': 'defender',
+      'Lesion': 'defender',
+      'Ela': 'defender',
+      'Vigil': 'defender',
+      'Maestro': 'defender',
+      'Alibi': 'defender',
+      'Clash': 'defender',
+      'Kaid': 'defender',
+      'Mozzie': 'defender',
+      'Warden': 'defender',
+      'Goyo': 'defender',
+      'Wamai': 'defender',
+      'Oryx': 'defender',
+      'Melusi': 'defender',
+      'Aruni': 'defender',
+      'Thunderbird': 'defender',
+      'Thorn': 'defender',
+      'Azami': 'defender',
+      'Solis': 'defender',
+      'Fenrir': 'defender',
+      'Tubarão': 'defender',
+      'Skopos': 'defender',
     };
 
     // Get operator name from URL param
@@ -94,14 +176,22 @@
       const imgEl = document.getElementById('operatorImage');
       imgEl.src = filename;
       imgEl.alt = operatorName;
-      document.getElementById('operatorName').textContent = operatorName;
+      // Force uppercase display
+      document.getElementById('operatorName').textContent = operatorName.toUpperCase();
     } else {
-      document.getElementById('operatorName').textContent = 'No operator selected';
+      document.getElementById('operatorName').textContent = 'NO OPERATOR SELECTED';
       document.getElementById('operatorImage').style.display = 'none';
     }
 
     function goBack() {
-      window.location.href = 'index.html';
+      const team = operatorsTeams[operatorName];
+      if (team === 'attacker') {
+        window.location.href = 'grids.html#attackers';
+      } else if (team === 'defender') {
+        window.location.href = 'grids.html#defenders';
+      } else {
+        window.location.href = 'index.html';
+      }
     }
   </script>
 </body>
