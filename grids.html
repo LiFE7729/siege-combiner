@@ -203,7 +203,7 @@
       .filter(op => op.team === team)
       .forEach(op => {
         const link = document.createElement('a');
-        link.href = `operator.html?name=${encodeURIComponent(op.name)}`;
+        link.href = `operator.html?name=${encodeURIComponent(op.name)}#${team}s`;
         link.className = 'operator-card';
         link.style.textDecoration = 'none';
         link.style.color = 'inherit';
