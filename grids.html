@@ -5,42 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Siege Operator Combiner</title>
 <style>
-/* Animation keyframes */
-@keyframes slideOutLeft {
-  from { transform: translateX(0); opacity: 1; }
-  to { transform: translateX(-100%); opacity: 0; }
-}
+  /* Animation keyframes */
+  @keyframes slideOutLeft {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(-100%); opacity: 0; }
+  }
+  @keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes slideOutRight {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+  }
+  @keyframes slideInLeft {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
 
-@keyframes slideInRight {
-  from { transform: translateX(100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes slideOutRight {
-  from { transform: translateX(0); opacity: 1; }
-  to { transform: translateX(100%); opacity: 0; }
-}
-
-@keyframes slideInLeft {
-  from { transform: translateX(-100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-.fade-out-left {
-  animation: slideOutLeft 0.3s forwards;
-}
-
-.fade-out-right {
-  animation: slideOutRight 0.3s forwards;
-}
-
-.fade-in-left {
-  animation: slideInLeft 0.3s forwards;
-}
-
-.fade-in-right {
-  animation: slideInRight 0.3s forwards;
-}
+  .fade-out-left {
+    animation: slideOutLeft 0.3s forwards;
+  }
+  .fade-out-right {
+    animation: slideOutRight 0.3s forwards;
+  }
+  .fade-in-left {
+    animation: slideInLeft 0.3s forwards;
+  }
+  .fade-in-right {
+    animation: slideInRight 0.3s forwards;
+  }
 
   body {
     margin: 0;
@@ -116,83 +110,10 @@
 <div id="defenders-list" class="hidden"></div>
 
 <script>
-  // Your operators array with no <script> tag inside
   const operators = [
+    // Your full operators array (as you posted)
     { name: "Striker", team: "attacker", image: "r6-operators-list-striker.webp" },
-    { name: "Sledge", team: "attacker", image: "r6-operators-list-sledge.webp" },
-    { name: "Thatcher", team: "attacker", image: "r6-operators-list-thatcher.webp" },
-    { name: "Ash", team: "attacker", image: "r6-operators-list-ash.webp" },
-    { name: "Thermite", team: "attacker", image: "r6-operators-list-thermite.webp" },
-    { name: "Twitch", team: "attacker", image: "r6-operators-list-twitch.webp" },
-    { name: "Montagne", team: "attacker", image: "r6-operators-list-montagne.webp" },
-    { name: "Glaz", team: "attacker", image: "r6-operators-list-glaz.webp" },
-    { name: "Fuze", team: "attacker", image: "r6-operators-list-fuze.webp" },
-    { name: "Blitz", team: "attacker", image: "r6-operators-list-blitz.webp" },
-    { name: "IQ", team: "attacker", image: "r6-operators-list-iq.webp" },
-    { name: "Buck", team: "attacker", image: "r6-operators-list-buck.webp" },
-    { name: "Blackbeard", team: "attacker", image: "r6-operators-list-blackbeard.webp" },
-    { name: "Capitão", team: "attacker", image: "r6-operators-list-capitao.webp" },
-    { name: "Hibana", team: "attacker", image: "r6-operators-list-hibana.webp" },
-    { name: "Jackal", team: "attacker", image: "r6-operators-list-jackal.webp" },
-    { name: "Ying", team: "attacker", image: "r6-operators-list-ying.webp" },
-    { name: "Zofia", team: "attacker", image: "r6-operators-list-zofia.webp" },
-    { name: "Dokkaebi", team: "attacker", image: "r6-operators-list-dokkaebi.webp" },
-    { name: "Lion", team: "attacker", image: "r6-operators-list-lion.webp" },
-    { name: "Finka", team: "attacker", image: "r6-operators-list-finka.webp" },
-    { name: "Maverick", team: "attacker", image: "r6-operators-list-maverick.webp" },
-    { name: "Nomad", team: "attacker", image: "r6-operators-list-nomad.webp" },
-    { name: "Gridlock", team: "attacker", image: "r6-operators-list-gridlock.webp" },
-    { name: "Nøkk", team: "attacker", image: "r6-operators-list-nokk.webp" },
-    { name: "Amaru", team: "attacker", image: "r6-operators-list-amaru.webp" },
-    { name: "Kali", team: "attacker", image: "r6-operators-list-kali.webp" },
-    { name: "Iana", team: "attacker", image: "r6-operators-list-iana.webp" },
-    { name: "Ace", team: "attacker", image: "r6-operators-list-ace.webp" },
-    { name: "Zero", team: "attacker", image: "r6-operators-list-zero.webp" },
-    { name: "Flores", team: "attacker", image: "r6-operators-list-flores.webp" },
-    { name: "Osa", team: "attacker", image: "r6-operators-list-osa.webp" },
-    { name: "Sens", team: "attacker", image: "r6-operators-list-sens.webp" },
-    { name: "Grim", team: "attacker", image: "r6-operators-list-grim.webp" },
-    { name: "Brava", team: "attacker", image: "r6-operators-list-brava.webp" },
-    { name: "Ram", team: "attacker", image: "r6-operators-list-ram.webp" },
-    { name: "Deimos", team: "attacker", image: "r6-operators-list-deimos.webp" },
-    { name: "Rauora", team: "attacker", image: "r6-operators-list-rauora.webp" },
-    
-    { name: "Sentry", team: "defender", image: "r6-operators-list-sentry.webp" },
-    { name: "Smoke", team: "defender", image: "r6-operators-list-smoke.webp" },
-    { name: "Mute", team: "defender", image: "r6-operators-list-mute.webp" },
-    { name: "Castle", team: "defender", image: "r6-operators-list-castle.webp" },
-    { name: "Pulse", team: "defender", image: "r6-operators-list-pulse.webp" },
-    { name: "Doc", team: "defender", image: "r6-operators-list-doc.webp" },
-    { name: "Rook", team: "defender", image: "r6-operators-list-rook.webp" },
-    { name: "Kapkan", team: "defender", image: "r6-operators-list-kapkan.webp" },
-    { name: "Tachanka", team: "defender", image: "r6-operators-list-tachanka.webp" },
-    { name: "Jäger", team: "defender", image: "r6-operators-list-jager.webp" },
-    { name: "Bandit", team: "defender", image: "r6-operators-list-bandit.webp" },
-    { name: "Frost", team: "defender", image: "r6-operators-list-frost.webp" },
-    { name: "Valkyrie", team: "defender", image: "r6-operators-list-valkyrie.webp" },
-    { name: "Caveira", team: "defender", image: "r6-operators-list-caveira.webp" },
-    { name: "Echo", team: "defender", image: "r6-operators-list-echo.webp" },
-    { name: "Mira", team: "defender", image: "r6-operators-list-mira.webp" },
-    { name: "Lesion", team: "defender", image: "r6-operators-list-lesion.webp" },
-    { name: "Ela", team: "defender", image: "r6-operators-list-ela.webp" },
-    { name: "Vigil", team: "defender", image: "r6-operators-list-vigil.webp" },
-    { name: "Maestro", team: "defender", image: "r6-operators-list-maestro.webp" },
-    { name: "Alibi", team: "defender", image: "r6-operators-list-alibi.webp" },
-    { name: "Clash", team: "defender", image: "r6-operators-list-clash.webp" },
-    { name: "Kaid", team: "defender", image: "r6-operators-list-kaid.webp" },
-    { name: "Mozzie", team: "defender", image: "r6-operators-list-mozzie.webp" },
-    { name: "Warden", team: "defender", image: "r6-operators-list-warden.webp" },
-    { name: "Goyo", team: "defender", image: "r6-operators-list-goyo.webp" },
-    { name: "Wamai", team: "defender", image: "r6-operators-list-wamai.webp" },
-    { name: "Oryx", team: "defender", image: "r6-operators-list-oryx.webp" },
-    { name: "Melusi", team: "defender", image: "r6-operators-list-melusi.webp" },
-    { name: "Aruni", team: "defender", image: "r6-operators-list-aruni.webp" },
-    { name: "Thunderbird", team: "defender", image: "r6-operators-list-thunderbird.webp" },
-    { name: "Thorn", team: "defender", image: "r6-operators-list-thorn.webp" },
-    { name: "Azami", team: "defender", image: "r6-operators-list-azami.webp" },
-    { name: "Solis", team: "defender", image: "r6-operators-list-solis.webp" },
-    { name: "Fenrir", team: "defender", image: "r6-operators-list-fenrir.webp" },
-    { name: "Tubarão", team: "defender", image: "r6-operators-list-tubarao.webp" },
+    // ... rest omitted here for brevity, keep your full list as is ...
     { name: "Skopos", team: "defender", image: "r6-operators-list-skopos.webp" },
   ];
 
@@ -203,11 +124,7 @@
 
   function renderOperators(team) {
     const container = team === 'attacker' ? attackersList : defendersList;
-    const otherContainer = team === 'attacker' ? defendersList : attackersList;
-
-    container.innerHTML = ''; // Clear the container
-    otherContainer.classList.add('hidden');
-    container.classList.remove('hidden');
+    container.innerHTML = ''; // Clear current list
 
     operators
       .filter(op => op.team === team)
@@ -232,49 +149,56 @@
       });
   }
 
-function animateSwitch(toTeam) {
-  const fromList = toTeam === 'attacker' ? defendersList : attackersList;
-  const toList = toTeam === 'attacker' ? attackersList : defendersList;
+  // Animate the switch between teams with sliding effects
+  function animateSwitch(toTeam) {
+    const fromTeam = toTeam === 'attacker' ? 'defender' : 'attacker';
+    const fromList = fromTeam === 'attacker' ? attackersList : defendersList;
+    const toList = toTeam === 'attacker' ? attackersList : defendersList;
 
-  // Add animation to hide current list
-  fromList.classList.add(toTeam === 'attacker' ? 'fade-out-right' : 'fade-out-left');
-
-  // When animation ends, swap content and animate new list in
-  fromList.addEventListener('animationend', function handler() {
-    fromList.classList.add('hidden');
-    fromList.classList.remove('fade-out-right', 'fade-out-left');
-    fromList.removeEventListener('animationend', handler);
-
+    // Prepare the list to show
     renderOperators(toTeam);
 
-    // Add animation to show the new list
-    toList.classList.add(toTeam === 'attacker' ? 'fade-in-left' : 'fade-in-right');
+    // Animate out current list
+    fromList.classList.add(toTeam === 'attacker' ? 'fade-out-right' : 'fade-out-left');
 
-    // Clean up animation class after it's done
-    toList.addEventListener('animationend', function cleanup() {
-      toList.classList.remove('fade-in-left', 'fade-in-right');
-      toList.removeEventListener('animationend', cleanup);
+    // When animation ends on fromList, hide it
+    fromList.addEventListener('animationend', function handleFadeOut() {
+      fromList.classList.add('hidden');
+      fromList.classList.remove('fade-out-right', 'fade-out-left');
+      fromList.removeEventListener('animationend', handleFadeOut);
+
+      // Show the new list and animate it in
+      toList.classList.remove('hidden');
+      toList.classList.add(toTeam === 'attacker' ? 'fade-in-left' : 'fade-in-right');
+
+      // Remove animation classes after fade-in completes
+      toList.addEventListener('animationend', function handleFadeIn() {
+        toList.classList.remove('fade-in-left', 'fade-in-right');
+        toList.removeEventListener('animationend', handleFadeIn);
+      });
     });
+  }
+
+  btnAttackers.addEventListener('click', () => {
+    if (!btnAttackers.classList.contains('active')) {
+      btnAttackers.classList.add('active');
+      btnDefenders.classList.remove('active');
+      animateSwitch('attacker');
+    }
   });
-}
 
-btnAttackers.addEventListener('click', () => {
-  if (!btnAttackers.classList.contains('active')) {
-    btnAttackers.classList.add('active');
-    btnDefenders.classList.remove('active');
-    animateSwitch('attacker');
-  }
-});
+  btnDefenders.addEventListener('click', () => {
+    if (!btnDefenders.classList.contains('active')) {
+      btnDefenders.classList.add('active');
+      btnAttackers.classList.remove('active');
+      animateSwitch('defender');
+    }
+  });
 
-btnDefenders.addEventListener('click', () => {
-  if (!btnDefenders.classList.contains('active')) {
-    btnDefenders.classList.add('active');
-    btnAttackers.classList.remove('active');
-    animateSwitch('defender');
-  }
-});
-  // Initial render: Attackers visible by default
+  // On page load, render attackers by default and show attackers list
   renderOperators('attacker');
+  attackersList.classList.remove('hidden');
+  defendersList.classList.add('hidden');
 </script>
 
 </body>
