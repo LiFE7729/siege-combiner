@@ -269,9 +269,25 @@
   });
 
   // On page load, render attackers by default and show attackers list
-  renderOperators('attacker');
-  attackersList.classList.remove('hidden');
-  defendersList.classList.add('hidden');
+ // Determine starting team based on hash
+let initialTeam = 'attacker';
+if (location.hash === '#defenders') {
+  initialTeam = 'defender';
+}
+
+// Set active button and render correct team
+if (initialTeam === 'attacker') {
+  btnAttackers.classList.add('active');
+  btnDefenders.classList.remove('active');
+} else {
+  btnDefenders.classList.add('active');
+  btnAttackers.classList.remove('active');
+}
+
+renderOperators(initialTeam);
+attackersList.classList.toggle('hidden', initialTeam !== 'attacker');
+defendersList.classList.toggle('hidden', initialTeam !== 'defender');
+
 </script>
 
 </body>
