@@ -108,14 +108,46 @@
       font-size: 0.95rem;
       letter-spacing: 1.5px;
     }
+    .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.home-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-button img {
+  width: 40px;
+  height: auto;
+  filter: drop-shadow(0 0 6px white);
+  transition: transform 0.3s ease;
+}
+
+.home-button img:hover {
+  transform: scale(1.1);
+}
+
   </style>
 </head>
 <body>
 
-  <div class="buttons">
-    <button id="btn-attackers" class="active">Attackers</button>
-    <button id="btn-defenders">Defenders</button>
-  </div>
+<div class="buttons">
+  <button id="btn-attackers" class="active">ATTACKERS</button>
+
+  <a href="index.html" class="home-button" title="Home">
+    <img src="r6-logo.png" alt="Home" />
+  </a>
+
+  <button id="btn-defenders">DEFENDERS</button>
+</div>
+
 
   <div id="attackers-list"></div>
   <div id="defenders-list" class="hidden"></div>
