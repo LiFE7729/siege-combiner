@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rainbow Six Siege Operator Selector</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .split-container {
+      display: flex;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .half {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .half:hover {
+      transform: scale(1.03);
+      z-index: 1;
+    }
+
+    .half img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .overlay {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      padding: 15px 30px;
+      border: 2px solid white;
+      border-radius: 10px;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="split-container">
+    <a href="grids.html#attackers" class="half">
+      <img src="Landing_Page_Attackers.jpg" alt="Attackers">
+      <div class="overlay">Attackers</div>
+    </a>
+    <a href="grids.html#defenders" class="half">
+      <img src="Landing_Page_Defenders.jpg" alt="Defenders">
+      <div class="overlay">Defenders</div>
+    </a>
+  </div>
+
+</body>
+</html>
