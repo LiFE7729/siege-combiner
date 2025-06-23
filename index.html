@@ -5,90 +5,129 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Rainbow Six Siege Operator Selector</title>
   <style>
-button {
-  background: transparent;
-  border: 2px solid white;
-  color: white;
-  font-size: 1.1rem;
-  padding: 10px 20px;
-  margin: 0 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  box-shadow: 0 0 8px white;
-  transition: background-color 0.3s, color 0.3s;
-
-  /* Add these two lines: */
-  font-family: 'Russo One', Arial, sans-serif;
-  text-transform: uppercase;
-}
-    .split-container {
-      display: flex;
-      width: 100%;
-      height: 100vh;
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('R6BlueBackground.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Russo One', Arial, sans-serif;
+      color: white;
+      text-align: center;
     }
 
-.half {
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 8px white; /* subtle glow */
-  border-radius: 8px;
-}
+    .page-wrapper {
+      background-color: rgba(0, 0, 0, 0.6); /* contrast overlay */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 40px;
+    }
 
-.half:hover {
-  transform: scale(1.03);
-  z-index: 1;
-  box-shadow: 0 0 20px 4px white; /* stronger glow on hover */
-}
+    .r6-logo {
+      width: 250px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .description {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 20px 40px;
+      line-height: 1.5;
+      text-shadow: 0 0 10px black;
+    }
+
+    .split-container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      width: 100%;
+      max-width: 900px;
+      margin-bottom: 40px;
+    }
+
+    .half {
+      flex: 1;
+      max-width: 280px;
+      aspect-ratio: 600 / 675;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 8px;
+      box-shadow: 0 0 8px white;
+    }
+
+    .half:hover {
+      transform: scale(1.03);
+      z-index: 1;
+      box-shadow: 0 0 25px 6px white;
+    }
 
     .half img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      border-radius: 8px;
     }
 
-.overlay {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  padding: 15px 30px;
-  border: 2px solid white;
-  border-radius: 10px;
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-  pointer-events: none;
-  text-transform: uppercase;
-  font-family: 'Russo One', Arial, sans-serif;
-}
-  text-shadow: 0 0 5px black;
-}
-
+    .overlay {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px 20px;
+      border: 2px solid white;
+      border-radius: 10px;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+      pointer-events: none;
+      text-transform: uppercase;
+      font-family: 'Russo One', Arial, sans-serif;
+      text-shadow: 0 0 5px black;
+    }
 
     a {
       text-decoration: none;
       color: inherit;
     }
+
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
   </style>
 </head>
 <body>
+  <div class="page-wrapper">
+    <img src="r6-logo.png" alt="Rainbow Six Siege" class="r6-logo">
 
-  <div class="split-container">
-<a href="grids.html#attackers" class="half">
-  <img src="Landing_Page_Attackers.jpg" alt="Attackers">
-  <div class="overlay">Attackers</div>
-</a>
-<a href="grids.html#defenders" class="half">
-  <img src="Landing_Page_Defenders.jpg" alt="Defenders">
-  <div class="overlay">Defenders</div>
-</a>
+    <p class="description">
+      Build your perfect Rainbow Six Siege look.<br>
+      Choose a team to start customizing operators with headgear and uniforms.
+    </p>
+
+    <div class="split-container">
+      <a href="grids.html#attackers" class="half">
+        <img src="Landing_Page_Attackers.jpg" alt="Attackers">
+        <div class="overlay">Attackers</div>
+      </a>
+      <a href="grids.html#defenders" class="half">
+        <img src="Landing_Page_Defenders.jpg" alt="Defenders">
+        <div class="overlay">Defenders</div>
+      </a>
+    </div>
+
+    <footer>
+      <!-- Footer for credits or links -->
+    </footer>
   </div>
-
 </body>
 </html>
