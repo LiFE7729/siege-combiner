@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Operator View</title>
-  <!-- Add Russo One font -->
+  <!-- Russo One font -->
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -69,7 +69,7 @@
   </div>
 
   <script>
-    // Map special operator names to file-friendly lowercase keys
+    // Special operator name overrides for file naming
     const nameOverrides = {
       'Capitão': 'capitao',
       'Nøkk': 'nokk',
@@ -79,7 +79,7 @@
       // Add others if needed
     };
 
-    // Map operator names to their teams for back button navigation
+    // Map operator names to teams for back button navigation
     const operatorsTeams = {
       // Attackers
       'Striker': 'attacker',
@@ -161,18 +161,22 @@
       'Skopos': 'defender',
     };
 
-    // Get operator name from URL param
+    // Get and decode operator name from URL parameters
     const params = new URLSearchParams(window.location.search);
-    const operatorName = params.get('name');
+    const operatorNameRaw = params.get('name') || '';
+    const operatorName = decodeURIComponent(operatorNameRaw).trim();
 
+    console.log('Operator name from URL:', operatorName);
+
+    // Generate the image filename from operator name
     function generateFilename(name) {
       if (!name) return '';
       const normalized = nameOverrides[name] || name.toLowerCase()
-        .normalize('NFD')             // Normalize unicode characters
-        .replace(/[\u0300-\u036f]/g, '') // Remove accents
-        .replace(/\s+/g, '-')        // Replace spaces with dashes
-        .replace(/[^a-z0-9-]/g, ''); // Remove invalid chars
-      return r6-operators-base-${normalized}-removebg-preview.png;
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '');
+      return `r6-operators-base-${normalized}-removebg-preview.png`;
     }
 
     if (operatorName) {
@@ -180,28 +184,33 @@
       const imgEl = document.getElementById('operatorImage');
       imgEl.src = filename;
       imgEl.alt = operatorName;
-      // Force uppercase display
       document.getElementById('operatorName').textContent = operatorName.toUpperCase();
     } else {
       document.getElementById('operatorName').textContent = 'NO OPERATOR SELECTED';
       document.getElementById('operatorImage').style.display = 'none';
     }
 
-function goBack() {
-  const normalizedName = Object.keys(operatorsTeams).find(
-    key => key.toUpperCase() === operatorName.toUpperCase()
-  );
+    // Back button handler
+    function goBack() {
+      if (!operatorName) {
+        window.location.href = 'index.html';
+        return;
+      }
 
-  const team = operatorsTeams[normalizedName];
+      const normalizedName = Object.keys(operatorsTeams).find(
+        key => key.toUpperCase() === operatorName.toUpperCase()
+      );
 
-  if (team === 'attacker') {
-    window.location.href = 'grids.html#attackers';
-  } else if (team === 'defender') {
-    window.location.href = 'grids.html#defenders';
-  } else {
-    window.location.href = 'index.html';
-  }
-}
+      const team = operatorsTeams[normalizedName];
+
+      if (team === 'attacker') {
+        window.location.href = 'index.html#attackers';
+      } else if (team === 'defender') {
+        window.location.href = 'index.html#defenders';
+      } else {
+        window.location.href = 'index.html';
+      }
+    }
   </script>
 </body>
 </html>
