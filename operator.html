@@ -191,26 +191,26 @@
     }
 
     // Back button handler
-    function goBack() {
-      if (!operatorName) {
-        window.location.href = 'index.html';
-        return;
-      }
+function goBack() {
+  if (!operatorName) {
+    window.location.href = 'grids.html';
+    return;
+  }
 
-      const normalizedName = Object.keys(operatorsTeams).find(
-        key => key.toUpperCase() === operatorName.toUpperCase()
-      );
+  const normalizedName = Object.keys(operatorsTeams).find(
+    key => key.toUpperCase() === operatorName.toUpperCase()
+  );
 
-      const team = operatorsTeams[normalizedName];
+  const team = operatorsTeams[normalizedName];
 
-      if (team === 'attacker') {
-        window.location.href = 'index.html#attackers';
-      } else if (team === 'defender') {
-        window.location.href = 'index.html#defenders';
-      } else {
-        window.location.href = 'index.html';
-      }
-    }
+  if (team === 'attacker') {
+    window.location.href = 'grids.html#attackers';
+  } else if (team === 'defender') {
+    window.location.href = 'grids.html#defenders';
+  } else {
+    window.location.href = 'grids.html';
+  }
+}
   </script>
 </body>
 </html>
