@@ -289,24 +289,6 @@ function animateSwitch(toTeam) {
   });
 }
 
-
-      renderOperators(toTeam);
-
-      fromList.classList.add(toTeam === 'attacker' ? 'fade-out-right' : 'fade-out-left');
-
-      fromList.addEventListener('animationend', function handleFadeOut() {
-        fromList.classList.add('hidden');
-        fromList.classList.remove('fade-out-right', 'fade-out-left');
-        fromList.removeEventListener('animationend', handleFadeOut);
-
-        toList.classList.remove('hidden');
-        toList.classList.add(toTeam === 'attacker' ? 'fade-in-left' : 'fade-in-right');
-
-        toList.addEventListener('animationend', function handleFadeIn() {
-          toList.classList.remove('fade-in-left', 'fade-in-right');
-          toList.removeEventListener('animationend', handleFadeIn);
-        });
-      });
     }
 
     btnAttackers.addEventListener('click', () => {
