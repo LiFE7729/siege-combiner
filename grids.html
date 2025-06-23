@@ -73,17 +73,19 @@
       box-shadow: 0 0 15px white;
     }
 
-    #attackers-list, #defenders-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px,1fr));
-      gap: 15px;
-      max-width: 960px;
-      margin: 0 auto 40px;
+#attackers-list, #defenders-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* widen cards */
+  gap: 15px;
+  max-width: 1000px;
+  margin: 0 auto 40px;
+}
     }
     #defenders-list.hidden, #attackers-list.hidden {
       display: none;
     }
 .operator-card {
+  width: 120px; /* match the min column width */
   background: rgba(0,0,0,0.5);
   border-radius: 8px;
   text-align: center;
@@ -91,12 +93,14 @@
   box-shadow: 0 0 10px white;
   display: inline-block;
 }
+
 .operator-card img {
-  width: 100px;
-  height: 133px;
+  width: 100%;
+  height: 140px;
   object-fit: cover;
   border-radius: 5px;
   margin-bottom: 5px;
+}
 }
 .operator-name {
   font-weight: bold;
