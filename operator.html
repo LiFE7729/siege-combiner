@@ -172,7 +172,7 @@
         .replace(/[\u0300-\u036f]/g, '') // Remove accents
         .replace(/\s+/g, '-')        // Replace spaces with dashes
         .replace(/[^a-z0-9-]/g, ''); // Remove invalid chars
-      return `r6-operators-base-${normalized}-removebg-preview.png`;
+      return r6-operators-base-${normalized}-removebg-preview.png;
     }
 
     if (operatorName) {
@@ -187,22 +187,15 @@
       document.getElementById('operatorImage').style.display = 'none';
     }
 
-function goBack() {
-  // Convert operator name to correct casing for lookup
-  const name = Object.keys(operatorsTeams).find(
-    key => key.toUpperCase() === operatorName.toUpperCase()
-  );
-
-  const team = operatorsTeams[name];
-
-  if (team === 'attacker') {
-    window.location.href = 'grids.html#attackers';
-  } else if (team === 'defender') {
-    window.location.href = 'grids.html#defenders';
-  } else {
-    window.location.href = 'index.html';
-  }
-}
+    function goBack() {
+      const team = operatorsTeams[operatorName];
+      if (team === 'attacker') {
+        window.location.href = 'grids.html#attackers';
+      } else if (team === 'defender') {
+        window.location.href = 'grids.html#defenders';
+      } else {
+        window.location.href = 'index.html';
+      }
     }
   </script>
 </body>
