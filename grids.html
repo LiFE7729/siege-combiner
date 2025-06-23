@@ -83,31 +83,33 @@
     #defenders-list.hidden, #attackers-list.hidden {
       display: none;
     }
-    .operator-card {
-      background: rgba(0,0,0,0.5);
-      border-radius: 8px;
-      text-align: center;
-      padding: 8px;
-      box-shadow: 0 0 10px white;
-      display: inline-block;
-      text-decoration: none;
-      color: inherit;
-      font-family: 'Russo One', Arial, sans-serif;
-      text-transform: uppercase;
-    }
-    .operator-card img {
-      width: 100px;
-      height: 133px;
-      object-fit: cover;
-      border-radius: 5px;
-      margin-bottom: 5px;
-      box-shadow: 0 0 8px #0078d7;
-    }
-    .operator-name {
-      font-weight: bold;
-      font-size: 0.95rem;
-      letter-spacing: 1.5px;
-    }
+.operator-card {
+  background: rgba(0,0,0,0.5);
+  border-radius: 8px;
+  text-align: center;
+  padding: 8px;
+  box-shadow: 0 0 10px white;
+  display: inline-block;
+  height: 170px; /* Slightly taller for consistent height */
+}
+
+.operator-card img {
+  width: 100px;
+  height: 120px; /* Reduce image height slightly to make space */
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.operator-name {
+  font-weight: bold;
+  font-size: 0.85rem;
+  word-wrap: break-word;
+  white-space: normal;
+  line-height: 1.1;
+  padding: 0 4px;
+}
+
     .buttons {
   display: flex;
   justify-content: center;
