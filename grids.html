@@ -273,23 +273,23 @@ function animateSwitch(toTeam) {
   const fromList = fromTeam === 'attacker' ? attackersList : defendersList;
   const toList = toTeam === 'attacker' ? attackersList : defendersList;
 
-  // Animate out the current list
+  // Make sure both grids aren't shown at once
   fromList.classList.add(toTeam === 'attacker' ? 'fade-out-right' : 'fade-out-left');
 
-  // When animation ends on the fromList...
   fromList.addEventListener('animationend', function handleFadeOut() {
     fromList.classList.add('hidden');
     fromList.classList.remove('fade-out-left', 'fade-out-right');
     fromList.removeEventListener('animationend', handleFadeOut);
 
-    // Now render the new list
-    renderOperators(toTeam);
+    // Clear out both grids before repopulating just the active one
+    attackersList.innerHTML = '';
+    defendersList.innerHTML = '';
 
-    // Show the new list and animate it in
+    // Now render and show the new list
+    renderOperators(toTeam);
     toList.classList.remove('hidden');
     toList.classList.add(toTeam === 'attacker' ? 'fade-in-left' : 'fade-in-right');
 
-    // Clean up the animation class after it finishes
     toList.addEventListener('animationend', function handleFadeIn() {
       toList.classList.remove('fade-in-left', 'fade-in-right');
       toList.removeEventListener('animationend', handleFadeIn);
@@ -315,20 +315,25 @@ function animateSwitch(toTeam) {
 
 // On page load, check the URL hash to determine which team to show
 const initialHash = window.location.hash;
+
+// Hide both lists initially
+attackersList.classList.add('hidden');
+defendersList.classList.add('hidden');
+
+// Remove active states just in case
+btnAttackers.classList.remove('active');
+btnDefenders.classList.remove('active');
+
 if (initialHash === '#defenders') {
   btnDefenders.classList.add('active');
-  btnAttackers.classList.remove('active');
   renderOperators('defender');
   defendersList.classList.remove('hidden');
-  attackersList.classList.add('hidden');
 } else {
-  // Default to attackers
   btnAttackers.classList.add('active');
-  btnDefenders.classList.remove('active');
   renderOperators('attacker');
   attackersList.classList.remove('hidden');
-  defendersList.classList.add('hidden');
 }
+
   </script>
 
 </body>
