@@ -302,10 +302,22 @@
       }
     });
 
-    // On page load, render attackers by default and show attackers list
-    renderOperators('attacker');
-    attackersList.classList.remove('hidden');
-    defendersList.classList.add('hidden');
+// On page load, check the URL hash to determine which team to show
+const initialHash = window.location.hash;
+if (initialHash === '#defenders') {
+  btnDefenders.classList.add('active');
+  btnAttackers.classList.remove('active');
+  renderOperators('defender');
+  defendersList.classList.remove('hidden');
+  attackersList.classList.add('hidden');
+} else {
+  // Default to attackers
+  btnAttackers.classList.add('active');
+  btnDefenders.classList.remove('active');
+  renderOperators('attacker');
+  attackersList.classList.remove('hidden');
+  defendersList.classList.add('hidden');
+}
   </script>
 
 </body>
