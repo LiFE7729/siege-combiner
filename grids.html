@@ -243,30 +243,30 @@
     const attackersList = document.getElementById('attackers-list');
     const defendersList = document.getElementById('defenders-list');
 
-    function renderOperators(team) {
-      const container = team === 'attacker' ? attackersList : defendersList;
-      container.innerHTML = ''; // Clear current list
+function renderOperators(team) {
+  const container = team === 'attacker' ? attackersList : defendersList;
+  container.innerHTML = ''; // Clear current list
 
-      operators
-        .filter(op => op.team === team)
-        .forEach(op => {
-          const link = document.createElement('a');
-          link.href = `operator.html?name=${encodeURIComponent(op.name)}`;
-          link.className = 'operator-card';
+  operators
+    .filter(op => op.team === team)
+    .forEach(op => {
+      const link = document.createElement('a');
+      link.href = `operator.html?name=${encodeURIComponent(op.name)}&from=${team}`; // ← this is the only change
+      link.className = 'operator-card';
 
-          const img = document.createElement('img');
-          img.src = op.image;
-          img.alt = op.name;
+      const img = document.createElement('img');
+      img.src = op.image;
+      img.alt = op.name;
 
-          const nameDiv = document.createElement('div');
-          nameDiv.className = 'operator-name';
-          nameDiv.textContent = op.name.toUpperCase();
+      const nameDiv = document.createElement('div');
+      nameDiv.className = 'operator-name';
+      nameDiv.textContent = op.name.toUpperCase();
 
-          link.appendChild(img);
-          link.appendChild(nameDiv);
-          container.appendChild(link);
-        });
-    }
+      link.appendChild(img);
+      link.appendChild(nameDiv);
+      container.appendChild(link);
+    });
+}
 
 function animateSwitch(toTeam) {
   const fromTeam = toTeam === 'attacker' ? 'defender' : 'attacker';
