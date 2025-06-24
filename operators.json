@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Striker",
+    "ctu": "ROS",
+    "role": "Support",
+    "armor": "◉◉◎",
+    "speed": "◉◉◎"
+  },
+
+
+  
+  {
+    "name": "Sentry",
+    "ctu": "ROS",
+    "role": "Support",
+    "armor": "◉◉◎",
+    "speed": "◉◉◎"
+  }
+]
