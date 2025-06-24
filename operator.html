@@ -194,6 +194,10 @@
       imgEl.alt = operatorName;
       document.getElementById('operatorName').textContent = operatorName.toUpperCase();
 
+      if (window.innerWidth < 768) {
+  document.getElementById('operatorDetails').removeAttribute('open');
+}
+
       // Fetch operator data and display info
       fetch('operators.json')
         .then(res => res.json())
