@@ -46,10 +46,32 @@
       color: white;
       text-transform: uppercase;
     }
-    .buttons {
-      text-align: center;
+
+    .top-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
       margin: 20px 0;
     }
+
+    @media (max-width: 600px) {
+      .top-controls {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .top-controls button {
+        width: 80%;
+        max-width: 240px;
+      }
+
+      .home-button img {
+        width: 50px;
+      }
+    }
+
     button {
       background: transparent;
       border: 2px solid white;
@@ -64,87 +86,84 @@
       font-family: 'Russo One', Arial, sans-serif;
       text-transform: uppercase;
     }
+
     button:hover {
       background-color: rgba(255,255,255,0.2);
     }
+
     button.active {
       background-color: white;
       color: #0078d7;
       box-shadow: 0 0 15px white;
     }
 
-#attackers-list, #defenders-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* widen cards */
-  gap: 15px;
-  max-width: 1000px;
-  margin: 0 auto 40px;
-}
+    .home-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+
+    .home-button img {
+      width: 40px;
+      height: auto;
+      filter: drop-shadow(0 0 6px white);
+      transition: transform 0.3s ease;
+    }
+
+    .home-button img:hover {
+      transform: scale(1.1);
+    }
+
+    #attackers-list, #defenders-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 15px;
+      max-width: 1000px;
+      margin: 0 auto 40px;
+    }
+
     #defenders-list.hidden, #attackers-list.hidden {
       display: none;
     }
-.operator-card {
-  width: 120px; /* match the min column width */
-  background: rgba(0,0,0,0.5);
-  border-radius: 8px;
-  text-align: center;
-  color: white;
-  text-decoration: none;
-  padding: 8px;
-  box-shadow: 0 0 10px white;
-  display: inline-block;
-}
+
+    .operator-card {
+      width: 120px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 8px;
+      text-align: center;
+      color: white;
+      text-decoration: none;
+      padding: 8px;
+      box-shadow: 0 0 10px white;
+      display: inline-block;
+    }
+
     .operator-card:visited {
       color: white;
     }
+
     .operator-card:hover {
-      color: white:
+      color: white;
     }
 
-.operator-card img {
-  width: 100%;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 5px;
-  margin-bottom: 5px;
-}
-}
-.operator-name {
-  font-weight: bold;
-  font-size: 0.95rem;
-}
-    .buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  margin: 20px 0;
-  flex-wrap: wrap;
-}
+    .operator-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-bottom: 5px;
+    }
 
-.home-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.home-button img {
-  width: 40px;
-  height: auto;
-  filter: drop-shadow(0 0 6px white);
-  transition: transform 0.3s ease;
-}
-
-.home-button img:hover {
-  transform: scale(1.1);
-}
-
+    .operator-name {
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
   </style>
 </head>
 <body>
 
-<div class="buttons">
+<!-- ✅ Updated Header Section -->
+<div class="top-controls">
   <button id="btn-attackers" class="active">ATTACKERS</button>
 
   <a href="index.html" class="home-button" title="Home">
@@ -153,7 +172,6 @@
 
   <button id="btn-defenders">DEFENDERS</button>
 </div>
-
 
   <div id="attackers-list"></div>
   <div id="defenders-list" class="hidden"></div>
