@@ -97,25 +97,6 @@
       margin: 6px 0;
     }
 
-    /* On desktop, show details always open, no arrow, disable toggle */
-    @media (min-width: 768px) {
-      details {
-        cursor: default;
-        padding: 15px 20px;
-      }
-      summary {
-        cursor: default;
-        /* Remove arrow */
-        color: white;
-      }
-      summary::before {
-        content: '';
-      }
-      details[open] {
-        /* force open */
-      }
-    }
-
     .back-button {
       background: transparent;
       border: 2px solid white;
@@ -142,7 +123,7 @@
     <img id="operatorImage" class="operator-image" src="" alt="Operator" />
     <h1 id="operatorName">Operator</h1>
 
-    <details id="operatorDetails" open>
+    <details id="operatorDetails">
       <summary>Operator Info</summary>
       <div class="operator-info" id="operatorInfo">
         <!-- Operator info (CTU, Role, Armor, Speed) will be inserted here -->
@@ -193,10 +174,6 @@
       imgEl.src = filename;
       imgEl.alt = operatorName;
       document.getElementById('operatorName').textContent = operatorName.toUpperCase();
-
-      if (window.innerWidth < 768) {
-  document.getElementById('operatorDetails').removeAttribute('open');
-}
 
       // Fetch operator data and display info
       fetch('operators.json')
