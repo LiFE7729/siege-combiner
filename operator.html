@@ -44,16 +44,78 @@
       letter-spacing: 2px;
       font-family: 'Russo One', Arial, sans-serif;
     }
-    .operator-info {
+
+    /* DETAILS and SUMMARY styling */
+
+    details {
+      background-color: rgba(0,0,0,0.5);
+      border-radius: 8px;
+      padding: 10px 15px;
       margin-top: 15px;
+      box-shadow: 0 0 8px white;
+      cursor: pointer;
       text-align: left;
+    }
+
+    summary {
+      font-weight: bold;
+      font-size: 1.1rem;
+      outline: none;
+      list-style: none; /* remove default arrow */
+      cursor: pointer;
+      user-select: none;
+      padding: 5px 0;
+      position: relative;
+      color: white;
+    }
+
+    summary::marker {
+      content: '';
+    }
+
+    summary::before {
+      content: "▶"; /* right arrow */
+      display: inline-block;
+      margin-right: 8px;
+      transition: transform 0.2s ease;
+    }
+
+    /* Rotate arrow when open */
+    details[open] > summary::before {
+      transform: rotate(90deg);
+    }
+
+    .operator-info {
       font-size: 1rem;
       line-height: 1.4;
       letter-spacing: 1px;
+      margin-top: 10px;
+      color: white;
     }
+
     .operator-info p {
       margin: 6px 0;
     }
+
+    /* On desktop, show details always open, no arrow, disable toggle */
+    @media (min-width: 768px) {
+      details {
+        cursor: default;
+        padding: 15px 20px;
+      }
+      summary {
+        cursor: default;
+        /* Remove arrow */
+        color: white;
+      }
+      summary::before {
+        content: '';
+      }
+      details[open] {
+        /* force open */
+      }
+    }
+
     .back-button {
       background: transparent;
       border: 2px solid white;
@@ -79,9 +141,14 @@
   <div class="operator-container">
     <img id="operatorImage" class="operator-image" src="" alt="Operator" />
     <h1 id="operatorName">Operator</h1>
-    <div class="operator-info" id="operatorInfo">
-      <!-- Operator info (CTU, Role, Armor, Speed) will be inserted here -->
-    </div>
+
+    <details id="operatorDetails" open>
+      <summary>Operator Info</summary>
+      <div class="operator-info" id="operatorInfo">
+        <!-- Operator info (CTU, Role, Armor, Speed) will be inserted here -->
+      </div>
+    </details>
+
     <button class="back-button" onclick="goBack()">← Back</button>
   </div>
 
