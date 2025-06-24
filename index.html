@@ -103,6 +103,32 @@
       font-size: 0.9rem;
       color: #ccc;
     }
+    .footer-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 20px;
+  font-size: 0.9rem;
+  color: #ccc;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.footer-grid > div {
+  flex: 1;
+  min-width: 120px;
+  text-align: center;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
   </style>
 </head>
 <body>
@@ -131,7 +157,7 @@
   <div class="footer-right">© Ubisoft · Fan Project · Not affiliated with Ubisoft.<br>
   Disclaimer: This is a fan-made project for informational and reference purposes only.
   Rainbow Six Siege and its associated imagery, logos, and trademarks are the property of Ubisoft.
-  Real-world insignias (e.g., FBI, GIGN) used in the game are the property of their respective organizations and are used here as part of Ubisoft’s fictional representation. This site is not affiliated with Ubisoft or any government or military agency.</div>
+  Real-world insignias used in the game are the property of their respective organizations and are used here as part of Ubisoft’s fictional representation. This site is not affiliated with Ubisoft or any government or military agency.</div>
 </footer>
 
   </div>
