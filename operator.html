@@ -174,7 +174,8 @@
         fetch('operators.json')
           .then(res => res.json())
           .then(data => {
-            const opData = data.find(op => op.name.toLowerCase() === operatorName.toLowerCase());
+            const normalizedName = nameOverrides[operatorName] || operatorName;
+            const opData = data.find(op => op.name.toLowerCase() === normalizedName.toLowerCase());
             const infoDiv = document.getElementById('operatorInfo');
             if (opData) {
               infoDiv.innerHTML = `
