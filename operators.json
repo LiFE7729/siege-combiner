@@ -8,14 +8,78 @@
   },
  {
     "name": "Sledge",
-    "ctu": "ROS",
-    "role": "Soft Breach",
+    "ctu": "SAS",
+    "role": "Soft Breach, Flank, Frontline",
     "armor": "◉◉◎",
     "speed": "◉◉◎"
   },
+ {
+    "name": "Thatcher",
+    "ctu": "SAS",
+    "role": "Anti-Gadget, Support",
+    "armor": "◉◉◎",
+    "speed": "◉◉◎"
+  },
+ {
+    "name": "Ash",
+    "ctu": "FBI SWAT",
+    "role": "Soft Breach, Flank, Entry-Fragger, Anti-Gadget",
+    "armor": "◉◎◎",
+    "speed": "◉◉◉"
+  },
+ {
+    "name": "Thermite",
+    "ctu": "FBI SWAT",
+    "role": "Hard Breach, Backline",
+    "armor": "◉◉◎",
+    "speed": "◉◉◎"
+  },
+{
+    "name": "Twitch",
+    "ctu": "GIGN",
+    "role": "Anti-Gadget, Intel, Support",
+    "armor": "◉◉◎",
+    "speed": "◉◉◎"
+  },
+{
+    "name": "Montagne",
+    "ctu": "GIGN",
+    "role": "Frontline, Support",
+    "armor": "◉◉◉",
+    "speed": "◉◎◎"
+  },
+{
+    "name": "Glaz",
+    "ctu": "SPETSNAZ",
+    "role": "Intel, Support",
+    "armor": "◉◎◎",
+    "speed": "◉◉◉"
+  },
+{
+    "name": "Fuze",
+    "ctu": "SPETSNAZ",
+    "role": "Anti-Gadget, Area Denial, Flank",
+    "armor": "◉◉◉",
+    "speed": "◉◎◎"
+  },
+{
+    "name": "Blitz",
+    "ctu": "GSG 9",
+    "role": "Frontline, Map Control",
+    "armor": "◉◉◎",
+    "speed": "◉◉◎"
+  },
+{
+    "name": "IQ",
+    "ctu": "GSG 9",
+    "role": "Intel, Anti-Gadget",
+    "armor": "◉◎◎",
+    "speed": "◉◉◉"
+  },
 
 
-  
+
+
   {
     "name": "Sentry",
     "ctu": "ROS",
@@ -23,4 +87,76 @@
     "armor": "◉◉◎",
     "speed": "◉◉◎"
   }
+{
+    "name": "Smoke",
+    "ctu": "SAS",
+    "role": "Area Denial, Support",
+    "armor": "◉◉◎",
+    "speed": "◉◉◎"
+  },
+{
+    "name": "Mute",
+    "ctu": "SAS",
+    "role": "Intel Denial, Support",
+    "armor": "◉◉◉",
+    "speed": "◉◎◎"
+  },
+{
+    "name": "Castle",
+    "ctu": "FBI SWAT",
+    "role": "Area Denial, Support",
+    "armor": "◉◉◎",
+    "speed": "◉◉◎"
+  },
+{
+    "name": "Pulse",
+    "ctu": "FBI SWAT",
+    "role": "Intel",
+    "armor": "◉◎◎",
+    "speed": "◉◉◉"
+  },
+{
+    "name": "Doc",
+    "ctu": "GIGN",
+    "role": "Support",
+    "armor": "◉◉◉",
+    "speed": "◉◎◎"
+  },
+{
+    "name": "Rook",
+    "ctu": "GIGN",
+    "role": "Support",
+    "armor": "◉◉◉",
+    "speed": "◉◎◎"
+  },
+{
+    "name": "Kapkan",
+    "ctu": "SPETSNAS",
+    "role": "Trapper, Anti-ntry",
+    "armor": "◉◉◎",
+    "speed": "◉◉◎"
+  },
+{
+    "name": "Tachanka",
+    "ctu": "SPETSNAZ",
+    "role": "Anti-Plant",
+    "armor": "◉◉◉",
+    "speed": "◉◎◎"
+  },
+{
+    "name": "Jager",
+    "ctu": "GSG 9",
+    "role": "Anti-Gadget, Support",
+    "armor": "◉◉◎",
+    "speed": "◉◉◎"
+  },
+{
+    "name": "Bandit",
+    "ctu": "GSG 9",
+    "role": "Anti-Breach, Support",
+    "armor": "◉◎◎",
+    "speed": "◉◉◉"
+  },
+
+  
 ]
