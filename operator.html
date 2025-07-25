@@ -128,76 +128,83 @@
     <button class="back-button" onclick="goBack()">← Back</button>
   </div>
 
-  <script>
-    const nameOverrides = {
-      'Capitão': 'capitao',
-      'Nøkk': 'nokk',
-      'Jäger': 'jager',
-      'Thorn': 'thorn',
-      'Tubarão': 'tubarao',
-    };
+<script>
+  const nameOverrides = {
+    'Capitão': 'capitao',
+    'Nøkk': 'nokk',
+    'Jäger': 'jager',
+    'Thorn': 'thorn',
+    'Tubarão': 'tubarao',
+  };
 
-    const params = new URLSearchParams(window.location.search);
-    const operatorName = params.get('name');
-    const fromTeam = params.get('from');
+  const params = new URLSearchParams(window.location.search);
+  const operatorName = params.get('name');
+  const fromTeam = params.get('from');
 
-    function generateFilename(name) {
-      if (!name) return '';
-      const normalized = nameOverrides[name] || name.toLowerCase()
-        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-        .replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-      return `r6-operators-base-${normalized}-removebg-preview.png`;
-    }
+  // ✅ Add this missing function:
+  function normalizeName(name) {
+    if (!name) return '';
+    return (nameOverrides[name] || name.toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''));
+  }
 
-    function goBack() {
-      if (fromTeam === 'attacker') {
-        window.location.href = 'grids.html#attackers';
-      } else if (fromTeam === 'defender') {
-        window.location.href = 'grids.html#defenders';
-      } else {
-        window.location.href = 'grids.html';
-      }
-    }
+  function generateFilename(name) {
+    if (!name) return '';
+    const normalized = normalizeName(name); // use normalizeName here for consistency
+    return `r6-operators-base-${normalized}-removebg-preview.png`;
+  }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      // Collapse info on mobile
-      if (window.innerWidth < 768) {
-        document.getElementById('operatorDetails').removeAttribute('open');
-      }
-
-      if (operatorName) {
-        const filename = generateFilename(operatorName);
-        document.getElementById('operatorImage').src = filename;
-        document.getElementById('operatorImage').alt = operatorName;
-        document.getElementById('operatorName').textContent = operatorName.toUpperCase();
-
-fetch('operators.json')
-  .then(res => res.json())
-  .then(data => {
-    const normalizedName = normalizeName(operatorName); // ✅ Define this!
-    const opData = data.find(op => normalizeName(op.name) === normalizedName); // ✅ Use helper
-    const infoDiv = document.getElementById('operatorInfo');
-    if (opData) {
-      infoDiv.innerHTML = `
-        <p><strong>CTU:</strong> ${opData.ctu}</p>
-        <p><strong>Role:</strong> ${opData.role}</p>
-        <p><strong>Armor:</strong> ${opData.armor}</p>
-        <p><strong>Speed:</strong> ${opData.speed}</p>
-      `;
+  function goBack() {
+    if (fromTeam === 'attacker') {
+      window.location.href = 'grids.html#attackers';
+    } else if (fromTeam === 'defender') {
+      window.location.href = 'grids.html#defenders';
     } else {
-      infoDiv.textContent = 'Operator info not found.';
+      window.location.href = 'grids.html';
     }
-  })
-  .catch(() => {
-    document.getElementById('operatorInfo').textContent = 'Failed to load operator data.';
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    if (window.innerWidth < 768) {
+      document.getElementById('operatorDetails').removeAttribute('open');
+    }
+
+    if (operatorName) {
+      const filename = generateFilename(operatorName);
+      document.getElementById('operatorImage').src = filename;
+      document.getElementById('operatorImage').alt = operatorName;
+      document.getElementById('operatorName').textContent = operatorName.toUpperCase();
+
+      fetch('operators.json')
+        .then(res => res.json())
+        .then(data => {
+          const normalizedName = normalizeName(operatorName);
+          const opData = data.find(op => normalizeName(op.name) === normalizedName);
+          const infoDiv = document.getElementById('operatorInfo');
+          if (opData) {
+            infoDiv.innerHTML = `
+              <p><strong>CTU:</strong> ${opData.ctu}</p>
+              <p><strong>Role:</strong> ${opData.role}</p>
+              <p><strong>Armor:</strong> ${opData.armor}</p>
+              <p><strong>Speed:</strong> ${opData.speed}</p>
+            `;
+          } else {
+            infoDiv.textContent = 'Operator info not found.';
+          }
+        })
+        .catch(error => {
+          console.error('Error loading operator data:', error);
+          document.getElementById('operatorInfo').textContent = '❌ Failed to load operator data.';
+        });
+    } else {
+      document.getElementById('operatorName').textContent = 'NO OPERATOR SELECTED';
+      document.getElementById('operatorImage').style.display = 'none';
+      document.getElementById('operatorInfo').textContent = '';
+    }
   });
-      } else {
-        document.getElementById('operatorName').textContent = 'NO OPERATOR SELECTED';
-        document.getElementById('operatorImage').style.display = 'none';
-        document.getElementById('operatorInfo').textContent = '';
-      }
-    });
-  </script>
+</script>
+
 
 </body>
 </html>
