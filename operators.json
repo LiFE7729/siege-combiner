@@ -128,7 +128,7 @@
   {
     "name": "Kapkan",
     "ctu": "SPETSNAZ",
-    "role": "Trapper, Anti-Entry",
+    "role": "Trapper, Anti-entry",
     "armor": "◉◉◎",
     "speed": "◉◉◎"
   },
@@ -140,7 +140,7 @@
     "speed": "◉◎◎"
   },
   {
-    "name": "Jäger",
+    "name": "Jager",
     "ctu": "GSG 9",
     "role": "Anti-Gadget, Support",
     "armor": "◉◉◎",
