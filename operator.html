@@ -187,9 +187,10 @@
               infoDiv.textContent = 'Operator info not found.';
             }
           })
-          .catch(() => {
-            document.getElementById('operatorInfo').textContent = 'Failed to load operator data.';
-          });
+.catch(error => {
+  console.error("Error loading operator data:", error);
+  operatorDetails.innerHTML = "<p>❌ Failed to load operator data. Check the JSON file or console for details.</p>";
+});
       } else {
         document.getElementById('operatorName').textContent = 'NO OPERATOR SELECTED';
         document.getElementById('operatorImage').style.display = 'none';
