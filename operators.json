@@ -77,6 +77,83 @@
     "speed": "◉◉◉"
   },
   {
+    "name": "Buck",
+    "ctu": "JTF2",
+    "role": "Breach, Support",
+    "armor": "◉◉◎",
+    "speed": "◉◉◎"
+  },
+  {
+    "name": "Blackbeard",
+    "ctu": "NAVY SEAL",
+    "role": "Breach, Front-Line",
+    "armor": "◉◉◉",
+    "speed": "◉◎◎"
+  },
+  {
+    "name": "Capitao",
+    "ctu": "BOPE",
+    "role": "Front-Line, Map Control",
+    "armor": "◉◎◎",
+    "speed": "◉◉◉"
+  },
+  {
+    "name": "Hibana",
+    "ctu": "SAT",
+    "role": "Breach, Front-Line",
+    "armor": "◉◎◎",
+    "speed": "◉◉◉"
+  },
+  {
+    "name": "Jackal",
+    "ctu": "GEO",
+    "role": "Intel, Map Control",
+    "armor": "◉◉◎",
+    "speed": "◉◉◎"
+  },
+  {
+    "name": "Ying",
+    "ctu": "SDU",
+    "role": "Front-Line, Map Control",
+    "armor": "◉◉◎",
+    "speed": "◉◉◎"
+  },
+  {
+    "name": "Zofia",
+    "ctu": "GROM",
+    "role": "Breach, Anti-Gadget",
+    "armor": "◉◉◉",
+    "speed": "◉◎◎"
+  },
+  {
+    "name": "Dokkaebi",
+    "ctu": "707TH",
+    "role": "Intel, Map Control",
+    "armor": "◉◎◎",
+    "speed": "◉◉◉"
+  },
+  {
+    "name": "Lion",
+    "ctu": "CBRN",
+    "role": "Intel, Map Control",
+    "armor": "◉◉◎",
+    "speed": "◉◉◎"
+  },
+  {
+    "name": "Finka",
+    "ctu": "CBRN",
+    "role": "Front-Line, Support",
+    "armor": "◉◉◎",
+    "speed": "◉◉◎"
+  },
+  {
+    "name": "Maverick",
+    "ctu": "GSUTR",
+    "role": "ROLE",
+    "armor": "◉◎◎",
+    "speed": "◉◉◉"
+  },
+  {
     "name": "Sentry",
     "ctu": "ROS",
     "role": "Support",
