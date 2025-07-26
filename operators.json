@@ -9,7 +9,7 @@
   {
     "name": "Sledge",
     "ctu": "SAS",
-    "role": "Soft Breach, Flank, Frontline",
+    "role": "Breach, Anti-Gadget",
     "armor": "◉◉◎",
     "speed": "◉◉◎"
   },
@@ -23,28 +23,28 @@
   {
     "name": "Ash",
     "ctu": "FBI SWAT",
-    "role": "Soft Breach, Flank, Entry-Fragger, Anti-Gadget",
+    "role": "Breach, Front-Line",
     "armor": "◉◎◎",
     "speed": "◉◉◉"
   },
   {
     "name": "Thermite",
     "ctu": "FBI SWAT",
-    "role": "Hard Breach, Backline",
+    "role": "Breach, Support",
     "armor": "◉◉◎",
     "speed": "◉◉◎"
   },
   {
     "name": "Twitch",
     "ctu": "GIGN",
-    "role": "Anti-Gadget, Intel, Support",
+    "role": "Anti-Gadget, Intel",
     "armor": "◉◉◎",
     "speed": "◉◉◎"
   },
   {
     "name": "Montagne",
     "ctu": "GIGN",
-    "role": "Frontline, Support",
+    "role": "Intel, Support",
     "armor": "◉◉◉",
     "speed": "◉◎◎"
   },
@@ -58,21 +58,21 @@
   {
     "name": "Fuze",
     "ctu": "SPETSNAZ",
-    "role": "Anti-Gadget, Area Denial, Flank",
+    "role": "Anti-Gadget",
     "armor": "◉◉◉",
     "speed": "◉◎◎"
   },
   {
     "name": "Blitz",
     "ctu": "GSG 9",
-    "role": "Frontline, Map Control",
+    "role": "Front-Line, Map Control",
     "armor": "◉◉◎",
     "speed": "◉◉◎"
   },
   {
     "name": "IQ",
     "ctu": "GSG 9",
-    "role": "Intel, Anti-Gadget",
+    "role": "Intel, Support",
     "armor": "◉◎◎",
     "speed": "◉◉◉"
   },
@@ -86,28 +86,28 @@
   {
     "name": "Smoke",
     "ctu": "SAS",
-    "role": "Area Denial, Support",
+    "role": "Anti-Entry, Trapper",
     "armor": "◉◉◎",
     "speed": "◉◉◎"
   },
   {
     "name": "Mute",
     "ctu": "SAS",
-    "role": "Intel Denial, Support",
+    "role": "Anti-Gadget, Crowd Control",
     "armor": "◉◉◉",
     "speed": "◉◎◎"
   },
   {
     "name": "Castle",
     "ctu": "FBI SWAT",
-    "role": "Area Denial, Support",
+    "role": "Anti-Entry, Support",
     "armor": "◉◉◎",
     "speed": "◉◉◎"
   },
   {
     "name": "Pulse",
     "ctu": "FBI SWAT",
-    "role": "Intel",
+    "role": "Intel, Support",
     "armor": "◉◎◎",
     "speed": "◉◉◉"
   },
@@ -128,14 +128,14 @@
   {
     "name": "Kapkan",
     "ctu": "SPETSNAZ",
-    "role": "Trapper, Anti-entry",
+    "role": "Anti-Entry, Trapper",
     "armor": "◉◉◎",
     "speed": "◉◉◎"
   },
   {
     "name": "Tachanka",
     "ctu": "SPETSNAZ",
-    "role": "Anti-Plant",
+    "role": "Anti-Entry, Crowd Control",
     "armor": "◉◉◉",
     "speed": "◉◎◎"
   },
@@ -149,7 +149,7 @@
   {
     "name": "Bandit",
     "ctu": "GSG 9",
-    "role": "Anti-Breach, Support",
+    "role": "Anti-Entry, Anti-Gadget",
     "armor": "◉◎◎",
     "speed": "◉◉◉"
   }
