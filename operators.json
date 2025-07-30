@@ -149,9 +149,121 @@
   {
     "name": "Maverick",
     "ctu": "GSUTR",
-    "role": "ROLE",
+    "role": "Breach, Front-Line",
     "armor": "◉◎◎",
     "speed": "◉◉◉"
+  },
+  {
+    "name": "Nomad",
+    "ctu": "GIGR",
+    "role": "Front-Line, Map Control",
+    "armor": "◉◉◎",
+    "speed": "◉◉◎"
+  },
+  {
+    "name": "Gridlock",
+    "ctu": "SASR",
+    "role": "Support, Map Control",
+    "armor": "◉◉◉",
+    "speed": "◉◎◎"
+  },
+  {
+    "name": "Nokk",
+    "ctu": "",
+    "role": "",
+    "armor": "◉◉◉",
+    "speed": "◉◉◉"
+  },
+  {
+    "name": "Amaru",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Kali",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Iana",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Ace",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Zero",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+    {
+    "name": "Flores",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Osa",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Sens",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Grim",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Brava",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Ram",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Deimos",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Rauora",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
   },
   {
     "name": "Sentry",
@@ -230,4 +342,186 @@
     "armor": "◉◎◎",
     "speed": "◉◉◉"
   }
+  {
+    "name": "Frost",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Valkyrie",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Caveira",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Echo",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Mira",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Lesion",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Ela",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Vigil",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Maestro",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Alibi",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Clash",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Kaid",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Mozzie",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Warden",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Wamai",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Goyo",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Oryx",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Melusi",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Aruni",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Thunderbird",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Thorn",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Azami",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Solis",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Fenrir",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Tubuaro",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
+  {
+    "name": "Skopos",
+    "ctu": "",
+    "role": "",
+    "armor": "",
+    "speed": ""
+  },
 ]
